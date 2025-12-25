@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-29 12:07:07.750516",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "from_scc__church__parish"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_scc__church__parish",
+   "fieldtype": "Data",
+   "label": "From (SCC / Church / Parish)"
+  },
+  {
+   "fieldname": "to_unit",
+   "label": "To (SCC / Church / Parish)",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "transfer_date",
+   "label": "Transfer Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "remarks",
+   "label": "Remarks",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-29 12:08:18.287207",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Parishioner Transfer Record",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

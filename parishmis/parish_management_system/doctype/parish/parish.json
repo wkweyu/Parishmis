@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-28 16:37:33.814115",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "parish_name"
+ ],
+ "fields": [
+  {"fieldname": "parish_name", "label": "Parish Name", "fieldtype": "Data", "reqd": 1},
+  {"fieldname": "diocese", "label": "Diocese", "fieldtype": "Link", "options": "Diocese", "reqd": 1},
+  {"fieldname": "parish_code", "label": "Parish Code", "fieldtype": "Data", "unique": 1},
+  {"fieldname": "address", "label": "Address", "fieldtype": "Data"},
+  {"fieldname": "phone_number", "label": "Phone Number", "fieldtype": "Data"},
+  {"fieldname": "email", "label": "Email", "fieldtype": "Data"},
+  {"fieldname": "status", "label": "Status", "fieldtype": "Select", "options": "Active\nInactive", "default": "Active"},
+  {"fieldname": "sub_parishes", "label": "Sub Parishes", "fieldtype": "Table", "options": "Parish"},
+  {"fieldname": "churches", "label": "Churches", "fieldtype": "Table", "options": "Church"}
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-28 16:41:17.045339",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Parish",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

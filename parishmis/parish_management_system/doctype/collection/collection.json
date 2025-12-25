@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-29 10:53:27.990524",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "collection_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "collection_name",
+   "fieldtype": "Data",
+   "label": "Collection Name"
+  },
+  {"fieldname": "group", "label": "Group", "fieldtype": "Link", "options": "Group", "reqd": 1},
+  {"fieldname": "date", "label": "Date", "fieldtype": "Date", "reqd": 1},
+  {"fieldname": "amount", "label": "Amount", "fieldtype": "Currency", "reqd": 1},
+  {"fieldname": "parishioner", "label": "Paid By", "fieldtype": "Link", "options": "Parishioner"},
+  {"fieldname": "collection_type", "label": "Type", "fieldtype": "Select", "options": "Offering\nDonation\nDues\nOther", "reqd": 1}
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-29 10:53:59.121540",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Collection",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

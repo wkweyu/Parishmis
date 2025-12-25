@@ -1,0 +1,199 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-29 11:36:21.787836",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "first_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First Name"
+  },
+  {
+   "fieldname": "middle_name",
+   "label": "Middle Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "last_name",
+   "label": "Last Name",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "full_name",
+   "label": "Full Name",
+   "fieldtype": "Read Only",
+   "fetch_from": "concat_ws(' ', first_name, middle_name, last_name)"
+  },
+  {
+   "fieldname": "gender",
+   "label": "Gender",
+   "fieldtype": "Select",
+   "options": "Male\nFemale",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_birth",
+   "label": "Date of Birth",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "marital_status",
+   "label": "Marital Status",
+   "fieldtype": "Select",
+   "options": "Single\nMarried\nWidowed\nDivorced"
+  },
+  {
+   "fieldname": "contact_section",
+   "label": "Contact & Address",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "phone_number",
+   "label": "Phone Number",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "email",
+   "label": "Email",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "address",
+   "label": "Address / Estate / Village",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "family_section",
+   "label": "Family & Membership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "family",
+   "label": "Family",
+   "fieldtype": "Link",
+   "options": "Family"
+  },
+  {
+   "fieldname": "church",
+   "label": "Church / Outstation",
+   "fieldtype": "Link",
+   "options": "Church"
+  },
+  {
+   "fieldname": "scc",
+   "label": "SCC",
+   "fieldtype": "Link",
+   "options": "SCC"
+  },
+  {
+   "fieldname": "association",
+   "label": "Association / Group",
+   "fieldtype": "Select",
+   "options": "None\nCWA\nCMA\nYouth\nPMC\nChoir\nOther"
+  },
+  {
+   "fieldname": "association_other",
+   "label": "Specify Other Group",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.association=='Other'"
+  },
+  {
+   "fieldname": "movement_section",
+   "label": "Movement / Transfer",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "current_status",
+   "label": "Current Status",
+   "fieldtype": "Select",
+   "options": "Active\nTransferred\nDeceased\nInactive",
+   "default": "Active"
+  },
+  {
+   "fieldname": "transfer_history",
+   "label": "Transfer History",
+   "fieldtype": "Table",
+   "options": "Parishioner Transfer Record"
+  },
+  {
+   "fieldname": "system_section",
+   "label": "System Info",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "user_account",
+   "label": "Linked User",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "search_fields": "full_name, phone_number, scc, church, association",
+ "sort_field": "modified",
+ "sort_order": "desc",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Parish Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "Priest",
+   "read": 1,
+   "write": 1
+  },
+  {
+   "role": "Catechist",
+   "read": 1,
+   "write": 1
+  }
+  
+
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-29 11:37:19.204207",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Parishioner",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

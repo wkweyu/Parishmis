@@ -5,13 +5,36 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "first_name"
+  "first_name",
+  "middle_name",
+  "last_name",
+  "full_name",
+  "parishioner_code",
+  "gender",
+  "date_of_birth",
+  "marital_status",
+  "contact_section",
+  "phone_number",
+  "email",
+  "address",
+  "family_section",
+  "family",
+  "parish",
+  "church",
+  "scc",
+  "movement_section",
+  "current_status",
+  "transfer_history",
+  "system_section",
+  "user_account",
+  "notes"
  ],
  "fields": [
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First Name"
+   "label": "First Name",
+   "reqd": 1
   },
   {
    "fieldname": "middle_name",
@@ -28,8 +51,9 @@
    "fieldname": "full_name",
    "label": "Full Name",
    "fieldtype": "Read Only",
-   "fetch_from": "concat_ws(' ', first_name, middle_name, last_name)"
+   "in_list_view": 1
   },
+  {"fieldname": "parishioner_code", "label": "Parishioner Code", "fieldtype": "Data", "unique": 1, "read_only": 1, "in_list_view": 1, "in_standard_filter": 1},
   {
    "fieldname": "gender",
    "label": "Gender",
@@ -40,29 +64,23 @@
   {
    "fieldname": "date_of_birth",
    "label": "Date of Birth",
-   "fieldtype": "Date"
+   "fieldtype": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "marital_status",
    "label": "Marital Status",
    "fieldtype": "Select",
-   "options": "Single\nMarried\nWidowed\nDivorced"
+   "options": "Single\nMarried\nWidowed\nDivorced",
+   "reqd": 1
   },
   {
    "fieldname": "contact_section",
    "label": "Contact & Address",
    "fieldtype": "Section Break"
   },
-  {
-   "fieldname": "phone_number",
-   "label": "Phone Number",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "email",
-   "label": "Email",
-   "fieldtype": "Data"
-  },
+  {"fieldname": "phone_number", "label": "Phone Number", "fieldtype": "Phone", "unique": 1, "reqd": 1, "in_list_view": 1},
+  {"fieldname": "email", "label": "Email", "fieldtype": "Data", "unique": 1},
   {
    "fieldname": "address",
    "label": "Address / Estate / Village",
@@ -80,65 +98,49 @@
    "options": "Family"
   },
   {
+   "fieldname": "parish",
+   "label": "Parish",
+   "fieldtype": "Link",
+   "options": "Parish",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
    "fieldname": "church",
    "label": "Church / Outstation",
    "fieldtype": "Link",
-   "options": "Church"
+   "options": "Church",
+   "reqd": 1,
+   "in_list_view": 1
   },
   {
    "fieldname": "scc",
    "label": "SCC",
    "fieldtype": "Link",
-   "options": "SCC"
-  },
-  {
-   "fieldname": "association",
-   "label": "Association / Group",
-   "fieldtype": "Select",
-   "options": "None\nCWA\nCMA\nYouth\nPMC\nChoir\nOther"
-  },
-  {
-   "fieldname": "association_other",
-   "label": "Specify Other Group",
-   "fieldtype": "Data",
-   "depends_on": "eval:doc.association=='Other'"
+   "options": "SCC",
+   "in_list_view": 1
   },
   {
    "fieldname": "movement_section",
    "label": "Movement / Transfer",
    "fieldtype": "Section Break"
   },
-  {
-   "fieldname": "current_status",
-   "label": "Current Status",
-   "fieldtype": "Select",
-   "options": "Active\nTransferred\nDeceased\nInactive",
-   "default": "Active"
-  },
-  {
-   "fieldname": "transfer_history",
-   "label": "Transfer History",
-   "fieldtype": "Table",
-   "options": "Parishioner Transfer Record"
-  },
+    {"fieldname": "current_status", "label": "Current Status", "fieldtype": "Select", "options": "Active\nTransferred\nDeceased\nInactive", "default": "Active"},
+    {"fieldname": "transfer_history", "label": "Transfer History", "fieldtype": "Table", "options": "Parishioner Transfer Record"},
   {
    "fieldname": "system_section",
    "label": "System Info",
    "fieldtype": "Section Break"
   },
-  {
-   "fieldname": "user_account",
-   "label": "Linked User",
-   "fieldtype": "Link",
-   "options": "User"
-  },
+    {"fieldname": "user_account", "label": "Linked User", "fieldtype": "Link", "options": "User"},
   {
    "fieldname": "notes",
    "label": "Notes",
    "fieldtype": "Small Text"
   }
  ],
- "search_fields": "full_name, phone_number, scc, church, association",
+ "title_field": "full_name",
+ "search_fields": "full_name, parishioner_code, phone_number, email, church, parish, scc",
  "sort_field": "modified",
  "sort_order": "desc",
  "permissions": [

@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-24 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "api_settings_section",
+  "consumer_key",
+  "consumer_secret",
+  "shortcode",
+  "passkey",
+  "stk_push_url",
+  "callback_url_section",
+  "callback_url"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "api_settings_section",
+   "fieldtype": "Section Break",
+   "label": "API Settings"
+  },
+  {
+   "fieldname": "consumer_key",
+   "fieldtype": "Data",
+   "label": "Consumer Key"
+  },
+  {
+   "fieldname": "consumer_secret",
+   "fieldtype": "Password",
+   "label": "Consumer Secret"
+  },
+  {
+   "fieldname": "shortcode",
+   "fieldtype": "Data",
+   "label": "Shortcode"
+  },
+  {
+   "fieldname": "passkey",
+   "fieldtype": "Password",
+   "label": "Passkey"
+  },
+  {
+   "fieldname": "stk_push_url",
+   "fieldtype": "Data",
+   "label": "STK Push URL"
+  },
+  {
+   "fieldname": "callback_url_section",
+   "fieldtype": "Section Break",
+   "label": "Callback Settings"
+  },
+  {
+   "description": "Expose this URL to Safaricom",
+   "fieldname": "callback_url",
+   "fieldtype": "Data",
+   "label": "Callback URL",
+   "read_only": 1
+  }
+ ],
+ "index_pages": [],
+ "is_submittable": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-01-24 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "M-Pesa Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

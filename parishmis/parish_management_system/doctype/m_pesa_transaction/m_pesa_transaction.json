@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-05 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transaction_id",
+  "msisdn",
+  "payer_name",
+  "parishioner",
+  "transaction_time",
+  "amount",
+  "currency",
+  "status",
+  "collection",
+  "notes"
+ ],
+ "fields": [
+  {"fieldname": "transaction_id", "fieldtype": "Data", "label": "Transaction ID", "reqd": 1, "unique": 1},
+  {"fieldname": "msisdn", "fieldtype": "Data", "label": "MSISDN"},
+  {"fieldname": "payer_name", "fieldtype": "Data", "label": "Payer Name"},
+  {"fieldname": "parishioner", "fieldtype": "Link", "label": "Parishioner", "options": "Parishioner"},
+  {"fieldname": "transaction_time", "fieldtype": "Datetime", "label": "Transaction Time"},
+  {"fieldname": "amount", "fieldtype": "Currency", "label": "Amount"},
+  {"fieldname": "currency", "fieldtype": "Link", "label": "Currency", "options": "Currency", "default": "KES"},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Success\nPending\nFailed", "default": "Success"},
+  {"fieldname": "collection", "fieldtype": "Link", "label": "Collection", "options": "Collection"},
+  {"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"}
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "M-Pesa Transaction",
+ "owner": "Administrator",
+ "permissions": [
+  {"role": "System Manager", "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "share": 1, "write": 1},
+  {"role": "Parish Admin", "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "share": 1, "write": 1}
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "transaction_id",
+ "search_fields": "transaction_id, msisdn, payer_name, parishioner, status",
+ "sort_field": "transaction_time",
+ "sort_order": "desc"
+}

@@ -4,30 +4,22 @@
  "creation": "2025-10-29 12:07:07.750516",
  "doctype": "DocType",
  "engine": "InnoDB",
+ "istable": 1,
  "field_order": [
-  "from_scc__church__parish"
+  "from_parish",
+  "from_church",
+  "to_parish",
+  "to_church",
+  "transfer_date",
+  "remarks"
  ],
  "fields": [
-  {
-   "fieldname": "from_scc__church__parish",
-   "fieldtype": "Data",
-   "label": "From (SCC / Church / Parish)"
-  },
-  {
-   "fieldname": "to_unit",
-   "label": "To (SCC / Church / Parish)",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "transfer_date",
-   "label": "Transfer Date",
-   "fieldtype": "Date"
-  },
-  {
-   "fieldname": "remarks",
-   "label": "Remarks",
-   "fieldtype": "Small Text"
-  }
+  {"fieldname": "from_parish", "fieldtype": "Link", "label": "From Parish", "options": "Parish"},
+  {"fieldname": "from_church", "fieldtype": "Link", "label": "From Church", "options": "Church"},
+  {"fieldname": "to_parish", "fieldtype": "Link", "label": "To Parish", "options": "Parish"},
+  {"fieldname": "to_church", "fieldtype": "Link", "label": "To Church", "options": "Church"},
+  {"fieldname": "transfer_date", "fieldtype": "Date", "label": "Transfer Date", "reqd": 1},
+  {"fieldname": "remarks", "fieldtype": "Small Text", "label": "Remarks"}
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
@@ -53,7 +45,9 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+ "sort_field": "transfer_date",
+ "sort_order": "desc",
+ "states": [],
+ "title_field": "to_church",
+ "search_fields": "from_parish, from_church, to_parish, to_church"
 }

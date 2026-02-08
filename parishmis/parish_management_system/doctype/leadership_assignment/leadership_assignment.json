@@ -1,0 +1,44 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-05 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_doctype",
+  "reference_name",
+  "role",
+  "person_doctype",
+  "person",
+  "from_date",
+  "to_date",
+  "is_current"
+ ],
+ "fields": [
+  {"fieldname": "reference_doctype", "fieldtype": "Link", "label": "Reference Doctype", "options": "DocType", "reqd": 1},
+  {"fieldname": "reference_name", "fieldtype": "Dynamic Link", "label": "Reference", "options": "reference_doctype", "reqd": 1},
+    {"fieldname": "role", "fieldtype": "Select", "label": "Role", "reqd": 1},
+  {"fieldname": "person_doctype", "fieldtype": "Select", "label": "Person Type", "options": "Parishioner\nUser", "reqd": 1, "default": "Parishioner"},
+  {"fieldname": "person", "fieldtype": "Dynamic Link", "label": "Person", "options": "person_doctype", "reqd": 1},
+  {"fieldname": "from_date", "fieldtype": "Date", "label": "From Date", "reqd": 1},
+  {"fieldname": "to_date", "fieldtype": "Date", "label": "To Date"},
+  {"fieldname": "is_current", "fieldtype": "Check", "label": "Current", "default": "1"}
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Leadership Assignment",
+ "owner": "Administrator",
+ "permissions": [
+  {"role": "System Manager", "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "share": 1, "write": 1},
+  {"role": "Parish Admin", "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1, "read": 1, "report": 1, "share": 1, "write": 1}
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "from_date",
+ "sort_order": "desc",
+ "states": [],
+ "title_field": "role",
+ "search_fields": "role, reference_name, person"
+}

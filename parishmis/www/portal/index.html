@@ -1,0 +1,221 @@
+{% extends "templates/web.html" %}
+
+{% block head %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/assets/parishmis/portal/manifest.json">
+    <meta name="theme-color" content="#0f172a" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        body: ['"Work Sans"', 'sans-serif']
+                    },
+                    colors: {
+                        midnight: '#0f172a',
+                        ember: '#f97316',
+                        parchment: '#f8f5ec',
+                        moss: '#15803d'
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body[data-path="/portal"] .page-breadcrumb,
+        body[data-path="/portal"] .page-header {
+            display: none;
+        }
+        body[data-path="/portal"] .web-page-wrapper,
+        body[data-path="/portal"] .page-wrapper {
+            padding-top: 0 !important;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+<div class="min-h-screen bg-slate-950 text-slate-50 font-body">
+    <main class="mx-auto flex max-w-xl flex-col gap-6 px-4 pb-24 pt-6">
+        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">
+            <a href="/" class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2">
+                <span>Home</span>
+            </a>
+            <a href="/?cmd=logout" class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-rose-200">
+                <span>Logout</span>
+            </a>
+        </div>
+        <header class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-5 shadow-xl">
+            <div class="flex items-start justify-between gap-3">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.35em] text-amber-300">Connected to {{ portal_user }}</p>
+                    <h1 class="mt-3 font-display text-2xl" data-greeting>Hello there</h1>
+                    <p class="mt-1 text-sm text-slate-300" data-sync-label>Syncing…</p>
+                </div>
+                <button id="refresh-btn" class="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-amber-200">Refresh</button>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                <div class="rounded-2xl bg-white/10 px-3 py-2">
+                    <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">Parish</p>
+                    <p class="text-base font-semibold" data-parish-chip>—</p>
+                </div>
+                <div class="rounded-2xl bg-white/10 px-3 py-2">
+                    <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">SCC</p>
+                    <p class="text-base font-semibold" data-scc-chip>—</p>
+                </div>
+            </div>
+            <div class="mt-4 rounded-2xl bg-black/20 px-4 py-3">
+                <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">Lifetime Giving</p>
+                <p class="text-3xl font-display" data-contribution-total>—</p>
+            </div>
+        </header>
+
+        <section aria-label="Quick actions" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+                <button class="flex min-h-[64px] flex-col justify-between rounded-2xl bg-white/5 p-4 text-left shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-300" data-action="give">
+                    <span class="text-2xl">💸</span>
+                    <div>
+                        <p class="text-base font-semibold">Give Now</p>
+                        <p class="text-xs text-slate-300">M-Pesa STK</p>
+                    </div>
+                </button>
+                <button class="flex min-h-[64px] flex-col justify-between rounded-2xl bg-white/5 p-4 text-left shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-300" data-action="nav" data-target="#sacraments-card">
+                    <span class="text-2xl">✝️</span>
+                    <div>
+                        <p class="text-base font-semibold">My Sacraments</p>
+                        <p class="text-xs text-slate-300">View records</p>
+                    </div>
+                </button>
+                <button class="flex min-h-[64px] flex-col justify-between rounded-2xl bg-white/5 p-4 text-left shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-300" data-action="family">
+                    <span class="text-2xl">👪</span>
+                    <div>
+                        <p class="text-base font-semibold">My Family</p>
+                        <p class="text-xs text-slate-300">Contacts & SCC</p>
+                    </div>
+                </button>
+                <button class="flex min-h-[64px] flex-col justify-between rounded-2xl bg-white/5 p-4 text-left shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-300" data-action="nav" data-target="#contributions-card">
+                    <span class="text-2xl">📄</span>
+                    <div>
+                        <p class="text-base font-semibold">Contributions</p>
+                        <p class="text-xs text-slate-300">Latest receipts</p>
+                    </div>
+                </button>
+                <button class="flex min-h-[64px] flex-col justify-between rounded-2xl bg-white/5 p-4 text-left shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-300" data-action="nav" data-target="#announcements-card">
+                    <span class="text-2xl">📢</span>
+                    <div>
+                        <p class="text-base font-semibold">Announcements</p>
+                        <p class="text-xs text-slate-300">Parish news</p>
+                    </div>
+                </button>
+                <button class="flex min-h-[64px] flex-col justify-between rounded-2xl bg-white/5 p-4 text-left shadow-lg shadow-black/40 focus:outline-none focus:ring-2 focus:ring-amber-300" data-action="nav" data-target="#activities-card">
+                    <span class="text-2xl">📅</span>
+                    <div>
+                        <p class="text-base font-semibold">Calendar</p>
+                        <p class="text-xs text-slate-300">Upcoming events</p>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section id="contributions-card" class="rounded-3xl bg-white/5 p-5 shadow-inner shadow-white/5">
+            <header class="flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">Recent Giving</p>
+                    <h2 class="font-display text-xl">Contributions</h2>
+                </div>
+            </header>
+            <div class="mt-4 space-y-3" data-recent-contributions>
+                <p class="text-sm text-slate-400">No contributions recorded.</p>
+            </div>
+        </section>
+
+        <section id="sacraments-card" class="rounded-3xl bg-white/5 p-5 shadow-inner shadow-white/5">
+            <header class="flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">Faith journey</p>
+                    <h2 class="font-display text-xl">My Sacraments</h2>
+                </div>
+            </header>
+            <div class="mt-4 space-y-3" data-recent-sacraments>
+                <p class="text-sm text-slate-400">No sacrament records yet.</p>
+            </div>
+        </section>
+
+        <section id="announcements-card" class="rounded-3xl bg-white/5 p-5 shadow-inner shadow-white/5">
+            <header class="flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">Parish news</p>
+                    <h2 class="font-display text-xl">Announcements</h2>
+                </div>
+            </header>
+            <div class="mt-4 space-y-3" data-recent-announcements>
+                <p class="text-sm text-slate-400">No announcements right now.</p>
+            </div>
+        </section>
+
+        <section id="activities-card" class="rounded-3xl bg-white/5 p-5 shadow-inner shadow-white/5">
+            <header class="flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.3em] text-slate-300">Parish calendar</p>
+                    <h2 class="font-display text-xl">Upcoming Activities</h2>
+                </div>
+            </header>
+            <div class="mt-4 space-y-3" data-upcoming-activities>
+                <p class="text-sm text-slate-400">No activities scheduled.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="fixed inset-0 z-40 hidden items-end bg-black/70 p-4" data-sheet="give">
+        <div class="w-full rounded-3xl bg-white p-6 text-slate-900 shadow-2xl">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Give</p>
+                    <h3 class="font-display text-xl">Send an Offering</h3>
+                </div>
+                <button class="text-sm font-semibold text-slate-500" data-sheet-close="give">Close</button>
+            </div>
+            <form id="give-form" class="mt-4 space-y-4">
+                <label class="block text-sm font-semibold text-slate-700">
+                    Collection Type
+                    <select name="collection_type" class="mt-1 w-full rounded-2xl border border-slate-200 px-3 py-3 text-base" required></select>
+                </label>
+                <label class="block text-sm font-semibold text-slate-700">
+                    Amount (KES)
+                    <input type="number" min="10" name="amount" class="mt-1 w-full rounded-2xl border border-slate-200 px-3 py-3 text-base" required />
+                </label>
+                <label class="block text-sm font-semibold text-slate-700">
+                    Note (optional)
+                    <textarea name="remarks" rows="2" class="mt-1 w-full rounded-2xl border border-slate-200 px-3 py-3 text-base" placeholder="Thanksgiving, tithe, etc."></textarea>
+                </label>
+                <button type="submit" class="w-full rounded-2xl bg-amber-400 px-4 py-3 text-base font-semibold text-slate-900">Send STK Push</button>
+                <p class="text-xs text-slate-500" id="give-feedback"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="fixed inset-0 z-40 hidden items-end bg-black/70 p-4" data-sheet="family">
+        <div class="w-full rounded-3xl bg-white p-6 text-slate-900 shadow-2xl">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Profile</p>
+                    <h3 class="font-display text-xl">Family & Contacts</h3>
+                </div>
+                <button class="text-sm font-semibold text-slate-500" data-sheet-close="family">Close</button>
+            </div>
+            <div class="mt-4 space-y-4 text-sm" data-family-body>
+                <p class="text-slate-500">No family information recorded yet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.portalBootstrap = window.portalBootstrap || {};
+    window.portalBootstrap.csrfToken = "{{ csrf_token }}";
+</script>
+<script src="/assets/parishmis/portal/app.js" defer></script>
+{% endblock %}

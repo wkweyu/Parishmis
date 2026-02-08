@@ -4,59 +4,32 @@
  "creation": "2025-10-28 19:51:04.519904",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": [
-  "scc_name"
+    "field_order": [
+    "scc_name",
+    "code",
+    "parish",
+    "church",
+    "leader",
+    "meeting_day",
+    "meeting_time",
+    "location",
+    "active",
+    "description"
  ],
  "fields": [
-  {
-   "fieldname": "scc_name",
-   "fieldtype": "Data",
-   "label": "SCC Name"
-  },
-
-  {
-   "fieldname": "church",
-   "label": "Church / Outstation",
-   "fieldtype": "Link",
-   "options": "Church",
-   "reqd": 1
-  },
-  {
-   "fieldname": "leader",
-   "label": "SCC Leader",
-   "fieldtype": "Link",
-   "options": "User"
-  },
-  {
-   "fieldname": "meeting_day",
-   "label": "Meeting Day",
-   "fieldtype": "Select",
-   "options": "Sunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday"
-  },
-  {
-   "fieldname": "meeting_time",
-   "label": "Meeting Time",
-   "fieldtype": "Time"
-  },
-  {
-   "fieldname": "location",
-   "label": "Meeting Location / Home",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "active",
-   "label": "Active",
-   "fieldtype": "Check",
-   "default": "1"
-  },
-  {
-   "fieldname": "description",
-   "label": "Notes",
-   "fieldtype": "Small Text"
-  }
+    {"fieldname": "scc_name", "fieldtype": "Data", "label": "SCC Name", "reqd": 1},
+    {"fieldname": "code", "fieldtype": "Data", "label": "Code", "unique": 1, "read_only": 1, "in_list_view": 1, "in_standard_filter": 1},
+  {"fieldname": "parish", "fieldtype": "Link", "label": "Parish", "options": "Parish", "reqd": 1, "read_only": 1, "fetch_from": "church.parish", "in_list_view": 1},
+  {"fieldname": "church", "label": "Church / Outstation", "fieldtype": "Link", "options": "Church", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "leader", "label": "SCC Leader", "fieldtype": "Link", "options": "User", "in_list_view": 1},
+  {"fieldname": "meeting_day", "label": "Meeting Day", "fieldtype": "Select", "options": "Sunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday"},
+  {"fieldname": "meeting_time", "label": "Meeting Time", "fieldtype": "Time"},
+  {"fieldname": "location", "label": "Meeting Location / Home", "fieldtype": "Data"},
+  {"fieldname": "active", "label": "Active", "fieldtype": "Check", "default": "1"},
+  {"fieldname": "description", "label": "Notes", "fieldtype": "Small Text"}
  ],
  "title_field": "scc_name",
- "search_fields": "scc_name, church",
+ "search_fields": "scc_name, code, church",
  "sort_field": "modified",
  "sort_order": "desc",
  "permissions": [

@@ -4,72 +4,34 @@
  "creation": "2025-10-28 19:38:04.676359",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": [
-  "church_name"
+    "field_order": [
+    "church_name",
+    "code",
+    "type",
+    "parent_church",
+    "parish",
+    "leader",
+    "address",
+    "active",
+    "description"
  ],
  "fields": [
-  {
-   "fieldname": "church_name",
-   "fieldtype": "Data",
-   "label": "Church Name"
-  },
-  
-  {
-   "fieldname": "church_name",
-   "label": "Church Name",
-   "fieldtype": "Data",
-   "reqd": 1
-  },
-  {
-   "fieldname": "type",
-   "label": "Type",
-   "fieldtype": "Select",
-   "options": "Church\nOutstation",
-   "reqd": 1
-  },
-  {
-   "fieldname": "parish",
-   "label": "Parish",
-   "fieldtype": "Link",
-   "options": "Parish",
-   "reqd": 0,
-   "description": "Select the parent Parish (optional if Sub-Parish is set)"
-  },
-  {
-   "fieldname": "sub_parish",
-   "label": "Sub Parish",
-   "fieldtype": "Link",
-   "options": "Sub Parish",
-   "reqd": 0,
-   "description": "Select the parent Sub-Parish (optional if Parish is set)"
-  },
-  {
-   "fieldname": "leader",
-   "label": "Leader / Chairperson",
-   "fieldtype": "Link",
-   "options": "User"
-  },
-  {
-   "fieldname": "address",
-   "label": "Location / Address",
-   "fieldtype": "Small Text"
-  },
-  {
-   "fieldname": "active",
-   "label": "Active",
-   "fieldtype": "Check",
-   "default": "1"
-  },
-  {
-   "fieldname": "description",
-   "label": "Notes",
-   "fieldtype": "Small Text"
-  }
+    {"fieldname": "church_name", "label": "Church Name", "fieldtype": "Data", "reqd": 1},
+    {"fieldname": "code", "label": "Code", "fieldtype": "Data", "unique": 1, "read_only": 1, "in_list_view": 1, "in_standard_filter": 1},
+  {"fieldname": "type", "label": "Type", "fieldtype": "Select", "options": "Main\nSub-Parish\nOutstation", "reqd": 1},
+  {"fieldname": "parent_church", "label": "Parent Church", "fieldtype": "Link", "options": "Church", "depends_on": "eval:doc.type!='Main'"},
+  {"fieldname": "parish", "label": "Parish", "fieldtype": "Link", "options": "Parish", "reqd": 1},
+  {"fieldname": "leader", "label": "Leader / Chairperson", "fieldtype": "Link", "options": "User"},
+  {"fieldname": "address", "label": "Location / Address", "fieldtype": "Small Text"},
+  {"fieldname": "active", "label": "Active", "fieldtype": "Check", "default": "1"},
+  {"fieldname": "description", "label": "Notes", "fieldtype": "Small Text"}
  ],
  "title_field": "church_name",
- "search_fields": "church_name, parish, sub_parish",
+ "search_fields": "church_name, parish, type",
  "sort_field": "modified",
  "sort_order": "desc",
+ "is_tree": 1,
+ "nsm_parent_field": "parent_church",
  "permissions": [
   {
    "role": "System Manager",

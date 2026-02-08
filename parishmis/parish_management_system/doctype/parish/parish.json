@@ -4,19 +4,23 @@
  "creation": "2025-10-28 16:37:33.814115",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": [
-  "parish_name"
+  "field_order": [
+  "parish_name",
+  "parish_code",
+  "diocese",
+  "address",
+  "phone_number",
+  "email",
+  "status"
  ],
  "fields": [
   {"fieldname": "parish_name", "label": "Parish Name", "fieldtype": "Data", "reqd": 1},
+  {"fieldname": "parish_code", "label": "Parish Code", "fieldtype": "Data", "unique": 1, "read_only": 1, "in_list_view": 1, "in_standard_filter": 1},
   {"fieldname": "diocese", "label": "Diocese", "fieldtype": "Link", "options": "Diocese", "reqd": 1},
-  {"fieldname": "parish_code", "label": "Parish Code", "fieldtype": "Data", "unique": 1},
   {"fieldname": "address", "label": "Address", "fieldtype": "Data"},
   {"fieldname": "phone_number", "label": "Phone Number", "fieldtype": "Data"},
   {"fieldname": "email", "label": "Email", "fieldtype": "Data"},
-  {"fieldname": "status", "label": "Status", "fieldtype": "Select", "options": "Active\nInactive", "default": "Active"},
-  {"fieldname": "sub_parishes", "label": "Sub Parishes", "fieldtype": "Table", "options": "Parish"},
-  {"fieldname": "churches", "label": "Churches", "fieldtype": "Table", "options": "Church"}
+  {"fieldname": "status", "label": "Status", "fieldtype": "Select", "options": "Active\nInactive", "default": "Active"}
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,

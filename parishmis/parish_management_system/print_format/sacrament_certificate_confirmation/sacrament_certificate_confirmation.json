@@ -1,0 +1,22 @@
+{
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "module": "Parish Management System",
+  "owner": "Administrator",
+  "print_format_type": "Jinja",
+  "print_format_builder": 0,
+  "raw_printing": 0,
+  "custom_format": 1,
+  "disabled": 0,
+  "doc_type": "Sacrament Record",
+  "standard": "No",
+  "align_labels_right": 0,
+  "show_section_headings": 0,
+  "line_breaks": 0,
+  "font_size": 0,
+  "css": "",
+  "creation": "2026-02-06 00:00:00.000000",
+  "modified": "2026-02-06 00:00:00.000000",
+  "name": "Sacrament Certificate - Confirmation",
+  "html": "{% set parishioner_name = frappe.db.get_value('Parishioner', doc.parishioner, 'full_name') or doc.parishioner %}\n{% set sacrament_name = frappe.db.get_value('Sacrament Type', doc.sacrament_type, 'sacrament_type') or doc.sacrament_type %}\n{% set parish_name = frappe.db.get_value('Parish', doc.parish, 'parish_name') or doc.parish %}\n{% set church_name = frappe.db.get_value('Church', doc.church, 'church_name') or doc.church %}\n{% set verify_url = frappe.utils.get_url_to_form('Sacrament Record', doc.name) %}\n{% set verify_hash = doc.verification_hash or (doc.name or '')[:8] %}\n{% set last_verified = doc.verification_last_verified_on or doc.modified %}\n<div style=\"border: 2px solid #1c3d5a; padding: 20px 26px; border-radius: 8px; font-family: 'Helvetica', sans-serif;\">\n  <div class=\"text-center\" style=\"margin-bottom: 18px;\">\n    <div style=\"font-size: 13px; letter-spacing: 1px; color: #1c3d5a; text-transform: uppercase;\">Certificate of Sacrament</div>\n    <h2 style=\"margin: 4px 0 2px; font-size: 24px; color: #0f2133;\">{{ sacrament_name }}</h2>\n    <div style=\"font-size: 12px; color: #4d6276;\">Parish: {{ parish_name }} | Church: {{ church_name }}</div>\n  </div>\n  <p style=\"font-size: 14px; line-height: 1.6; color: #0f2133; margin: 0 0 12px;\">\n    This certifies that <strong>{{ parishioner_name }}</strong> received the sacrament of\n    <strong>{{ sacrament_name }}</strong> on <strong>{{ frappe.utils.format_date(doc.sacrament_date) }}</strong>\n    at <strong>{{ church_name }}</strong>.\n  </p>\n  <table style=\"width: 100%; font-size: 12px; margin-top: 8px; border-collapse: collapse;\">\n    <tr><td style=\"width: 32%; font-weight: 600; padding: 6px 0; color: #1c3d5a;\">Parish</td><td style=\"padding: 6px 0;\">{{ parish_name }}</td></tr>\n    <tr><td style=\"font-weight: 600; padding: 6px 0; color: #1c3d5a;\">Priest</td><td style=\"padding: 6px 0;\">{{ doc.priest or '-' }}</td></tr>\n    <tr><td style=\"font-weight: 600; padding: 6px 0; color: #1c3d5a;\">Register Book</td><td style=\"padding: 6px 0;\">{{ doc.register_book or '-' }}</td></tr>\n    <tr><td style=\"font-weight: 600; padding: 6px 0; color: #1c3d5a;\">Page / Entry</td><td style=\"padding: 6px 0;\">{{ doc.page_number or '-' }} / {{ doc.entry_number or '-' }}</td></tr>\n    <tr><td style=\"font-weight: 600; padding: 6px 0; color: #1c3d5a;\">Certificate No.</td><td style=\"padding: 6px 0;\">{{ doc.certificate_no or '-' }}</td></tr>\n  </table>\n  <div style=\"display: flex; gap: 16px; align-items: center; margin-top: 16px; font-size: 11px; color: #4d6276;\">\n    <div style=\"flex: 2;\">Printed on {{ frappe.utils.now_datetime().strftime('%d %b %Y %H:%M') }} by {{ frappe.session.user }}.<br>Verification Hash: <strong>{{ verify_hash }}</strong><br>Last Verified: {{ frappe.utils.format_datetime(last_verified) }}</div>\n    <div style=\"flex: 2; text-align: right;\">\n      <div>Verify: {{ verify_url }}</div>\n      <div style=\"font-size: 10px; color: #6b7c8d;\">Scan/visit to confirm authenticity</div>\n    </div>\n    <div style=\"flex: 1; text-align: right;\">\n      <img src=\"{{ doc.get_verification_qr_data_uri() }}\" alt=\"QR\" style=\"width: 110px; height: 110px; border: 1px solid #d9e1ea; padding: 4px; border-radius: 6px;\">\n    </div>\n  </div>\n</div>"
+}

@@ -1,0 +1,37 @@
+{
+ "actions": [],
+ "creation": "2026-02-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "issingle": 1,
+ "field_order": [
+  "general_section",
+  "default_cash_account",
+  "default_bank_account",
+  "default_mpesa_account",
+  "mpesa_section",
+  "enable_mpesa",
+  "mpesa_shortcode",
+  "mpesa_consumer_key",
+  "mpesa_consumer_secret"
+ ],
+ "fields": [
+  {"fieldname": "general_section", "fieldtype": "Section Break", "label": "General Finance"},
+  {"fieldname": "default_cash_account", "fieldtype": "Link", "label": "Default Cash Account", "options": "Account", "reqd": 1, "description": "Account to debit for Cash collections"},
+  {"fieldname": "default_bank_account", "fieldtype": "Link", "label": "Default Bank Account", "options": "Account", "reqd": 1, "description": "Account to debit for Bank Transfer collections"},
+  {"fieldname": "default_mpesa_account", "fieldtype": "Link", "label": "Default M-Pesa Account", "options": "Account", "reqd": 1, "description": "Account to debit for M-Pesa collections"},
+  {"fieldname": "mpesa_section", "fieldtype": "Section Break", "label": "M-Pesa Integration"},
+  {"fieldname": "enable_mpesa", "fieldtype": "Check", "label": "Enable M-Pesa Integration"},
+  {"fieldname": "mpesa_shortcode", "fieldtype": "Data", "label": "Shortcode", "depends_on": "enable_mpesa"},
+  {"fieldname": "mpesa_consumer_key", "fieldtype": "Password", "label": "Consumer Key", "depends_on": "enable_mpesa"},
+  {"fieldname": "mpesa_consumer_secret", "fieldtype": "Password", "label": "Consumer Secret", "depends_on": "enable_mpesa"}
+ ],
+ "modified": "2026-02-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Payment Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1}
+ ]
+}

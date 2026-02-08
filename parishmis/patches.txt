@@ -4,3 +4,11 @@
 
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
+parishmis.parish_management_system.patches.sync_parish_workspace_shortcuts
+parishmis.parish_management_system.patches.merge_sub_parish_into_church
+parishmis.parish_management_system.patches.drop_sub_parish_doctype
+parishmis.parish_management_system.patches.backfill_association_member_parish
+parishmis.parish_management_system.patches.backfill_family_and_scc_codes
+parishmis.parish_management_system.doctype.sacrament_type.patch_seed_sacrament_types
+parishmis.parish_management_system.patches.backfill_codes
+parishmis.parish_management_system.patches.backfill_family_parish_from_church

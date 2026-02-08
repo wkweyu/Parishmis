@@ -4,6 +4,7 @@
 ParishMIS is a comprehensive Church Management System built on the **Frappe Framework** and **ERPNext**, designed to support Catholic parishes and dioceses in managing parishioners, church structures, SCCs, sacraments, events, and collections — including **M-Pesa (Daraja API) integration** for digital giving.
 
 ---
+🚧 Status: Active Development (Production-ready core, features expanding)
 
 ## ✝️ Purpose
 
@@ -65,6 +66,14 @@ This hierarchy is enforced through linked DocTypes and business rules.
 - SCC / Church / Association membership
 - Transfer history
 - Portal user linking
+
+Parishioners may belong to:
+- An SCC
+- A Church / Outstation
+- Church Associations (e.g. CWA, CMA, Youth)
+
+Membership changes are tracked via transfer history to preserve audit integrity.
+
 
 ### 3. Family Management
 - Household grouping
@@ -249,15 +258,9 @@ For the service of the Church.
 
 ---
 
-### ✅ Next Logical Steps
-1. Commit this README to GitHub  
-2. Add **fixtures** for:
-   - Roles
-   - Sacrament Types
-   - Collection Types  
-3. Proceed to **SCC & SCC Member DocTypes**  
-4. Then **Family → Sacraments → Collections**
-
-If you want, I can next:
-- Review this README for public/open-source release, **or**
-- Generate **fixtures JSON** for initial church setup (roles, sacraments, associations).
+## 🗺️ Roadmap
+- Associations (CWA, CMA, Youth) DocTypes
+- Parishioner transfer workflow
+- SCC meeting attendance
+- Mobile-friendly parishioner portal
+- SMS / WhatsApp notifications

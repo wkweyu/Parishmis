@@ -5,6 +5,7 @@
 import frappe
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
+from parishmis.api.portal_setup import ensure_portal_user
 
 class Parishioner(Document):
     def validate(self):
@@ -84,3 +85,20 @@ class Parishioner(Document):
                 "remarks": "Auto-logged on church change",
             },
         )
+
+
+@frappe.whitelist()
+def create_portal_user(parishioner: str, user_email: str | None = None):
+    if not parishioner:
+        frappe.throw("Parishioner is required.")
+
+    if not frappe.has_permission("Parishioner", "write", parishioner):
+        frappe.throw("Not permitted to create portal users for this Parishioner.")
+
+    parishioner_doc = frappe.get_doc("Parishioner", parishioner)
+    email = user_email or parishioner_doc.email
+    if not email:
+        frappe.throw("An email address is required to create a portal user.")
+
+    result = ensure_portal_user(parishioner_doc.name, email)
+    return result

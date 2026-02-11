@@ -2,10 +2,52 @@
 # For license information, please see license.txt
 
 # import frappe
+import re
+import secrets
+import string
+
 import frappe
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
 from parishmis.api.portal_setup import ensure_portal_user
+
+PASSWORD_MIN_LENGTH = 10
+PASSWORD_REQUIREMENTS = (
+    "Password must be at least 10 characters and include uppercase, lowercase, "
+    "a number, and a symbol."
+)
+
+
+def _is_valid_password(password: str) -> bool:
+    if len(password) < PASSWORD_MIN_LENGTH:
+        return False
+    if not re.search(r"[A-Z]", password):
+        return False
+    if not re.search(r"[a-z]", password):
+        return False
+    if not re.search(r"\d", password):
+        return False
+    if not re.search(r"[^A-Za-z0-9]", password):
+        return False
+    return True
+
+
+def _generate_password() -> str:
+    symbols = "!@#$%^&*()-_=+[]{}:,.?"
+    required = [
+        secrets.choice(string.ascii_uppercase),
+        secrets.choice(string.ascii_lowercase),
+        secrets.choice(string.digits),
+        secrets.choice(symbols),
+    ]
+    alphabet = string.ascii_letters + string.digits + symbols
+    remaining = PASSWORD_MIN_LENGTH - len(required)
+    password_chars = required + [secrets.choice(alphabet) for _ in range(max(0, remaining))]
+    secrets.SystemRandom().shuffle(password_chars)
+    password = "".join(password_chars)
+    if not _is_valid_password(password):
+        return _generate_password()
+    return password
 
 class Parishioner(Document):
     def validate(self):
@@ -121,7 +163,9 @@ def send_portal_welcome_email(parishioner: str, temp_password: str | None = None
     if not recipient:
         frappe.throw("No email is linked to this Parishioner.")
 
-    password = temp_password or frappe.generate_hash(length=10)
+    password = temp_password or _generate_password()
+    if not _is_valid_password(password):
+        frappe.throw(PASSWORD_REQUIREMENTS)
     frappe.utils.password.update_password(user_doc.name, password)
 
     portal_url = frappe.utils.get_url("/portal")

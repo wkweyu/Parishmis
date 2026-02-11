@@ -25,7 +25,8 @@ frappe.ui.form.on("Parishioner", {
 							fieldtype: "Password",
 							label: "Temporary Password",
 							depends_on: "eval:!doc.auto_generate",
-							description: "Leave blank to auto-generate.",
+							description:
+								"Min 10 chars with upper, lower, number, and symbol. Leave blank to auto-generate.",
 						},
 					],
 					(values) => {

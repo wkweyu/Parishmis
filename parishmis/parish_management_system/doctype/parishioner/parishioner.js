@@ -12,22 +12,44 @@ frappe.ui.form.on("Parishioner", {
 				frappe.set_route("Form", "User", frm.doc.user_account);
 			});
 			frm.add_custom_button("Send Welcome Email", () => {
-				frappe.call({
-					method:
-						"parishmis.parish_management_system.doctype.parishioner.parishioner.send_portal_welcome_email",
-					args: {
-						parishioner: frm.doc.name,
+				frappe.prompt(
+					[
+						{
+							fieldname: "auto_generate",
+							fieldtype: "Check",
+							label: "Auto-generate temporary password",
+							default: 1,
+						},
+						{
+							fieldname: "temp_password",
+							fieldtype: "Password",
+							label: "Temporary Password",
+							depends_on: "eval:!doc.auto_generate",
+							description: "Leave blank to auto-generate.",
+						},
+					],
+					(values) => {
+						frappe.call({
+							method:
+								"parishmis.parish_management_system.doctype.parishioner.parishioner.send_portal_welcome_email",
+							args: {
+								parishioner: frm.doc.name,
+								temp_password: values.auto_generate ? null : values.temp_password,
+							},
+							freeze: true,
+							callback: (res) => {
+								if (res && res.message) {
+									frappe.show_alert({
+										message: `Welcome email sent to ${res.message.recipient}.`,
+										indicator: "green",
+									});
+								}
+							},
+						});
 					},
-					freeze: true,
-					callback: (res) => {
-						if (res && res.message) {
-							frappe.show_alert({
-								message: `Welcome email sent to ${res.message.recipient}.`,
-								indicator: "green",
-							});
-						}
-					},
-				});
+					"Send Welcome Email",
+					"Send"
+				);
 			});
 		}
 

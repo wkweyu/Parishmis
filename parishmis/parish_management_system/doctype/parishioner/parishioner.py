@@ -105,7 +105,7 @@ def create_portal_user(parishioner: str, user_email: str | None = None):
 
 
 @frappe.whitelist()
-def send_portal_welcome_email(parishioner: str):
+def send_portal_welcome_email(parishioner: str, temp_password: str | None = None):
     if not parishioner:
         frappe.throw("Parishioner is required.")
 
@@ -113,9 +113,16 @@ def send_portal_welcome_email(parishioner: str):
         frappe.throw("Not permitted to email this Parishioner.")
 
     parishioner_doc = frappe.get_doc("Parishioner", parishioner)
-    recipient = parishioner_doc.user_account or parishioner_doc.email
+    if not parishioner_doc.user_account:
+        frappe.throw("This Parishioner has no linked portal user.")
+
+    user_doc = frappe.get_doc("User", parishioner_doc.user_account)
+    recipient = user_doc.email or parishioner_doc.email
     if not recipient:
         frappe.throw("No email is linked to this Parishioner.")
+
+    password = temp_password or frappe.generate_hash(length=10)
+    frappe.utils.password.update_password(user_doc.name, password)
 
     portal_url = frappe.utils.get_url("/portal")
     login_url = frappe.utils.get_url("/login")
@@ -123,8 +130,9 @@ def send_portal_welcome_email(parishioner: str):
     message = (
         f"Hello {parishioner_doc.full_name or 'Parishioner'},<br><br>"
         "Your ParishMIS portal account is ready.<br>"
+        f"Temporary password: <b>{password}</b><br>"
         f"Portal: <a href=\"{portal_url}\">{portal_url}</a><br>"
-        "To set your password, visit the login page and use <b>Forgot Password</b>.<br>"
+        "Please change your password after logging in.<br>"
         f"Login: <a href=\"{login_url}\">{login_url}</a><br><br>"
         "If you need help, please contact the parish office."
     )

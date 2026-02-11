@@ -30,10 +30,20 @@
         body[data-path="/portal"] .page-header {
             display: none;
         }
+        body[data-path="/portal"] .breadcrumb,
+        body[data-path="/portal"] .page-title,
+        body[data-path="/portal"] .page-title-row {
+            display: none;
+        }
         body[data-path="/portal"] footer,
         body[data-path="/portal"] .web-footer,
         body[data-path="/portal"] .page-footer {
             display: none;
+        }
+        body[data-path="/portal"],
+        body[data-path="/portal"] .web-page-wrapper,
+        body[data-path="/portal"] .page-wrapper {
+            background: #0f172a;
         }
         body[data-path="/portal"] .web-page-wrapper,
         body[data-path="/portal"] .page-wrapper {
@@ -43,6 +53,12 @@
         }
         body[data-path="/portal"] .page-content-wrapper {
             padding-bottom: 0 !important;
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        body[data-path="/portal"] .page-content {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
         }
     </style>
 {% endblock %}

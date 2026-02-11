@@ -27,36 +27,72 @@
     </script>
     <style>
         body[data-path="/portal"] .page-breadcrumb,
-        body[data-path="/portal"] .page-header {
+        body[data-path="/portal/"] .page-breadcrumb,
+        body[data-route="portal"] .page-breadcrumb,
+        body[data-path="/portal"] .page-header,
+        body[data-path="/portal/"] .page-header,
+        body[data-route="portal"] .page-header,
+        body[data-path="/portal"] .page-head,
+        body[data-path="/portal/"] .page-head,
+        body[data-route="portal"] .page-head {
             display: none;
         }
         body[data-path="/portal"] .breadcrumb,
+        body[data-path="/portal/"] .breadcrumb,
+        body[data-route="portal"] .breadcrumb,
         body[data-path="/portal"] .page-title,
-        body[data-path="/portal"] .page-title-row {
+        body[data-path="/portal/"] .page-title,
+        body[data-route="portal"] .page-title,
+        body[data-path="/portal"] .page-title-row,
+        body[data-path="/portal/"] .page-title-row,
+        body[data-route="portal"] .page-title-row {
             display: none;
         }
         body[data-path="/portal"] footer,
+        body[data-path="/portal/"] footer,
+        body[data-route="portal"] footer,
         body[data-path="/portal"] .web-footer,
-        body[data-path="/portal"] .page-footer {
+        body[data-path="/portal/"] .web-footer,
+        body[data-route="portal"] .web-footer,
+        body[data-path="/portal"] .page-footer,
+        body[data-path="/portal/"] .page-footer,
+        body[data-route="portal"] .page-footer {
             display: none;
         }
+        html,
+        body,
         body[data-path="/portal"],
+        body[data-path="/portal/"] ,
+        body[data-route="portal"],
         body[data-path="/portal"] .web-page-wrapper,
-        body[data-path="/portal"] .page-wrapper {
+        body[data-path="/portal/"] .web-page-wrapper,
+        body[data-route="portal"] .web-page-wrapper,
+        body[data-path="/portal"] .page-wrapper,
+        body[data-path="/portal/"] .page-wrapper,
+        body[data-route="portal"] .page-wrapper {
             background: #0f172a;
+            margin: 0;
         }
         body[data-path="/portal"] .web-page-wrapper,
-        body[data-path="/portal"] .page-wrapper {
+        body[data-path="/portal/"] .web-page-wrapper,
+        body[data-route="portal"] .web-page-wrapper,
+        body[data-path="/portal"] .page-wrapper,
+        body[data-path="/portal/"] .page-wrapper,
+        body[data-route="portal"] .page-wrapper {
             padding-top: 0 !important;
             padding-bottom: 0 !important;
             margin-top: 0 !important;
         }
-        body[data-path="/portal"] .page-content-wrapper {
+        body[data-path="/portal"] .page-content-wrapper,
+        body[data-path="/portal/"] .page-content-wrapper,
+        body[data-route="portal"] .page-content-wrapper {
             padding-bottom: 0 !important;
             padding-top: 0 !important;
             margin-top: 0 !important;
         }
-        body[data-path="/portal"] .page-content {
+        body[data-path="/portal"] .page-content,
+        body[data-path="/portal/"] .page-content,
+        body[data-route="portal"] .page-content {
             padding-top: 0 !important;
             margin-top: 0 !important;
         }

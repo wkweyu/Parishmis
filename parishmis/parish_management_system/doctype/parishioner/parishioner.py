@@ -102,3 +102,32 @@ def create_portal_user(parishioner: str, user_email: str | None = None):
 
     result = ensure_portal_user(parishioner_doc.name, email)
     return result
+
+
+@frappe.whitelist()
+def send_portal_welcome_email(parishioner: str):
+    if not parishioner:
+        frappe.throw("Parishioner is required.")
+
+    if not frappe.has_permission("Parishioner", "read", parishioner):
+        frappe.throw("Not permitted to email this Parishioner.")
+
+    parishioner_doc = frappe.get_doc("Parishioner", parishioner)
+    recipient = parishioner_doc.user_account or parishioner_doc.email
+    if not recipient:
+        frappe.throw("No email is linked to this Parishioner.")
+
+    portal_url = frappe.utils.get_url("/portal")
+    login_url = frappe.utils.get_url("/login")
+    subject = "Welcome to ParishMIS Portal"
+    message = (
+        f"Hello {parishioner_doc.full_name or 'Parishioner'},<br><br>"
+        "Your ParishMIS portal account is ready.<br>"
+        f"Portal: <a href=\"{portal_url}\">{portal_url}</a><br>"
+        "To set your password, visit the login page and use <b>Forgot Password</b>.<br>"
+        f"Login: <a href=\"{login_url}\">{login_url}</a><br><br>"
+        "If you need help, please contact the parish office."
+    )
+
+    frappe.sendmail(recipients=[recipient], subject=subject, message=message)
+    return {"recipient": recipient}

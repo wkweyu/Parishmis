@@ -11,7 +11,24 @@ frappe.ui.form.on("Parishioner", {
 			frm.add_custom_button("Open Portal User", () => {
 				frappe.set_route("Form", "User", frm.doc.user_account);
 			});
-			return;
+			frm.add_custom_button("Send Welcome Email", () => {
+				frappe.call({
+					method:
+						"parishmis.parish_management_system.doctype.parishioner.parishioner.send_portal_welcome_email",
+					args: {
+						parishioner: frm.doc.name,
+					},
+					freeze: true,
+					callback: (res) => {
+						if (res && res.message) {
+							frappe.show_alert({
+								message: `Welcome email sent to ${res.message.recipient}.`,
+								indicator: "green",
+							});
+						}
+					},
+				});
+			});
 		}
 
 		frm.add_custom_button("Create Portal User", () => {

@@ -174,6 +174,7 @@ def send_portal_welcome_email(parishioner: str, temp_password: str | None = None
     message = (
         f"Hello {parishioner_doc.full_name or 'Parishioner'},<br><br>"
         "Your ParishMIS portal account is ready.<br>"
+        f"Username: <b>{recipient}</b><br>"
         f"Temporary password: <b>{password}</b><br>"
         f"Portal: <a href=\"{portal_url}\">{portal_url}</a><br>"
         "Please change your password after logging in.<br>"

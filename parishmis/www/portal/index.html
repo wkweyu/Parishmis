@@ -30,9 +30,19 @@
         body[data-path="/portal"] .page-header {
             display: none;
         }
+        body[data-path="/portal"] footer,
+        body[data-path="/portal"] .web-footer,
+        body[data-path="/portal"] .page-footer {
+            display: none;
+        }
         body[data-path="/portal"] .web-page-wrapper,
         body[data-path="/portal"] .page-wrapper {
             padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+        }
+        body[data-path="/portal"] .page-content-wrapper {
+            padding-bottom: 0 !important;
         }
     </style>
 {% endblock %}

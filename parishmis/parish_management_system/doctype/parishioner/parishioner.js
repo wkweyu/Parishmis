@@ -62,12 +62,15 @@ frappe.ui.form.on("Parishioner", {
 					args: {
 						parishioner: frm.doc.name,
 						user_email: email,
+						send_welcome_email: 1,
 					},
 					freeze: true,
 					callback: (res) => {
 						if (res && res.message) {
 							frappe.show_alert({
-								message: "Portal user created successfully.",
+								message: res.message.welcome_email
+									? "Portal user created and welcome email sent."
+									: "Portal user created successfully.",
 								indicator: "green",
 							});
 							frm.reload_doc();

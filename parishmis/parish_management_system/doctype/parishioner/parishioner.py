@@ -9,6 +9,7 @@ import string
 import frappe
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
+from frappe.utils import cint
 from parishmis.api.portal_setup import ensure_portal_user
 
 PASSWORD_MIN_LENGTH = 10
@@ -130,7 +131,7 @@ class Parishioner(Document):
 
 
 @frappe.whitelist()
-def create_portal_user(parishioner: str, user_email: str | None = None):
+def create_portal_user(parishioner: str, user_email: str | None = None, send_welcome_email: int = 1):
     if not parishioner:
         frappe.throw("Parishioner is required.")
 
@@ -143,6 +144,8 @@ def create_portal_user(parishioner: str, user_email: str | None = None):
         frappe.throw("An email address is required to create a portal user.")
 
     result = ensure_portal_user(parishioner_doc.name, email)
+    if cint(send_welcome_email):
+        result["welcome_email"] = send_portal_welcome_email(parishioner_doc.name)
     return result
 
 

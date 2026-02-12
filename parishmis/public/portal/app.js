@@ -68,7 +68,12 @@
       credentials: 'include'
     });
 
-    const data = await response.json();
+    let data = {};
+    try {
+      data = await response.json();
+    } catch (error) {
+      data = {};
+    }
     if (!response.ok || data.exc) {
       throw new Error(data.exc || data._server_messages || 'Unexpected server response');
     }
@@ -346,6 +351,21 @@
     });
   }
 
+  function bindLogout() {
+    const logoutLink = document.querySelector('[data-logout]');
+    if (!logoutLink) return;
+    logoutLink.addEventListener('click', async (event) => {
+      event.preventDefault();
+      try {
+        await fetchJSON('logout', { method: 'POST' });
+      } catch (error) {
+        console.warn('Logout failed', error);
+      } finally {
+        window.location.href = '/login';
+      }
+    });
+  }
+
   function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/assets/parishmis/portal/sw.js').catch((error) => {
@@ -358,6 +378,7 @@
     bindRefresh();
     bindActions();
     bindGiveForm();
+    bindLogout();
     registerServiceWorker();
     loadBootstrap();
     loadCollectionTypes();

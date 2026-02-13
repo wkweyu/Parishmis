@@ -176,6 +176,7 @@ def _build_sacrament_history(ctx, limit=None):
         fields=[
             "name",
             "sacrament_type",
+            "sacrament_type_label",
             "sacrament_date",
             "church",
             "priest",

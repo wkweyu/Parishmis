@@ -4,6 +4,7 @@
     syncLabel: '[data-sync-label]',
     parishChip: '[data-parish-chip]',
     sccChip: '[data-scc-chip]',
+    churchChip: '[data-church-chip]',
     contributionTotal: '[data-contribution-total]',
     contributionsList: '[data-recent-contributions]',
     sacramentsList: '[data-recent-sacraments]',
@@ -86,6 +87,7 @@
     setText(selectors.greeting, `Hello ${info.first_name || info.full_name || 'friend'}`);
     setText(selectors.parishChip, info.parish_name || info.parish || '—');
     setText(selectors.sccChip, info.scc_name || info.scc || '—');
+    setText(selectors.churchChip, info.church_name || info.church || '—');
     renderFamily(payload);
   }
 

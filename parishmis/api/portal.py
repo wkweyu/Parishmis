@@ -86,6 +86,10 @@ def _build_profile(ctx):
         as_dict=True,
     ) or {}
 
+    doc.setdefault("parish", ctx.get("parish"))
+    doc.setdefault("church", ctx.get("church"))
+    doc.setdefault("scc", ctx.get("scc"))
+
     if doc.get("parish"):
         doc["parish_name"] = frappe.db.get_value("Parish", doc.get("parish"), "parish_name")
     if doc.get("church"):
@@ -177,6 +181,7 @@ def _build_sacrament_history(ctx, limit=None):
             "name",
             "sacrament_type",
             "sacrament_type_label",
+            "sacrament_type.sacrament_type as sacrament_type_name",
             "sacrament_date",
             "church",
             "priest",

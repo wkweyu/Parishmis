@@ -175,7 +175,7 @@
       .map(
         (row) => `
           <div class="rounded-2xl bg-slate-900/40 px-4 py-3">
-            <p class="text-sm font-semibold">${row.sacrament_type_label || row.sacrament_type}</p>
+            <p class="text-sm font-semibold">${row.sacrament_type_name || row.sacrament_type_label || row.sacrament_type}</p>
             <p class="text-xs text-slate-400">${fmtDate(row.sacrament_date)} · ${row.church || ''}</p>
             <p class="text-xs text-slate-500">Presider: ${row.priest || '—'}</p>
           </div>`

@@ -4,6 +4,8 @@
 frappe.ui.form.on("Parishioner", {
 	refresh(frm) {
 		configure_membership_grid(frm);
+		apply_membership_status_rules(frm);
+		apply_minor_rules(frm);
 		if (frm.is_new()) {
 			return;
 		}
@@ -103,6 +105,18 @@ frappe.ui.form.on("Parishioner", {
 			);
 		});
 	},
+	membership_status(frm) {
+		apply_membership_status_rules(frm);
+	},
+	is_minor(frm) {
+		apply_minor_rules(frm);
+	},
+	visit_start(frm) {
+		validate_visit_dates_client(frm);
+	},
+	visit_end(frm) {
+		validate_visit_dates_client(frm);
+	},
 	movement_memberships_add(frm, cdt, cdn) {
 		set_membership_defaults(frm, cdt, cdn);
 	},
@@ -132,6 +146,39 @@ function configure_membership_grid(frm) {
 	grid.toggle_display("parishioner", false);
 }
 
+function apply_membership_status_rules(frm) {
+	const status = frm.doc.membership_status || "Registered";
+	const registered = status === "Registered";
+	frm.set_df_property("church", "reqd", registered);
+	update_field_visibility(frm, "family", registered);
+	update_field_visibility(frm, "scc", registered);
+	if (!registered) {
+		clear_fields(frm, ["family", "scc"]);
+	}
+	const visitor_fields = ["home_parish", "visit_start", "visit_end"];
+	visitor_fields.forEach((field) => update_field_visibility(frm, field, !registered));
+	if (registered) {
+		clear_fields(frm, visitor_fields);
+	}
+}
+
+function apply_minor_rules(frm) {
+	const isMinor = !!frm.doc.is_minor;
+	frm.set_df_property("guardian", "reqd", isMinor ? 1 : 0);
+	update_field_visibility(frm, "guardian", isMinor);
+	if (!isMinor && frm.doc.guardian) {
+		frm.set_value("guardian", null);
+	}
+}
+
+function validate_visit_dates_client(frm) {
+	const { visit_start: start, visit_end: end } = frm.doc;
+	if (start && end && frappe.datetime.str_to_obj(end) < frappe.datetime.str_to_obj(start)) {
+		frappe.msgprint(__("Visit End cannot be before Visit Start."));
+		frm.set_value("visit_end", null);
+	}
+}
+
 function set_membership_defaults(frm, cdt, cdn) {
 	if (!frm?.doc?.name) {
 		return;
@@ -141,4 +188,19 @@ function set_membership_defaults(frm, cdt, cdn) {
 	if (!row?.status) {
 		frappe.model.set_value(cdt, cdn, "status", "Active");
 	}
+}
+
+function update_field_visibility(frm, fieldname, show) {
+	if (!frm.get_field(fieldname)) {
+		return;
+	}
+	frm.toggle_display(fieldname, show);
+}
+
+function clear_fields(frm, fields) {
+	fields.forEach((field) => {
+		if (frm.doc[field]) {
+			frm.set_value(field, null);
+		}
+	});
 }

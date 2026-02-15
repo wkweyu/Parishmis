@@ -29,7 +29,7 @@ def get_data(filters):
             church,
             scc
         FROM `tabParishioner`
-        WHERE name NOT IN (
+        WHERE membership_status = 'Registered' AND name NOT IN (
             SELECT parent FROM `tabMovement Member` WHERE status = 'Active'
         ) {conditions}
         ORDER BY full_name ASC

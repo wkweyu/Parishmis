@@ -8,6 +8,7 @@ def execute(filters=None):
             p.church AS church,
             COUNT(p.name) AS total_members
         FROM `tabParishioner` p
+        WHERE p.membership_status = 'Registered' AND p.church IS NOT NULL
         GROUP BY p.church
         ORDER BY p.church
         """,

@@ -22,6 +22,13 @@
   "parish",
   "church",
   "scc",
+  "membership_profile_section",
+  "membership_status",
+  "is_minor",
+  "guardian",
+  "home_parish",
+  "visit_start",
+  "visit_end",
   "movement_section",
   "current_status",
   "transfer_history",
@@ -121,6 +128,48 @@
    "fieldtype": "Link",
    "options": "SCC",
    "in_list_view": 1
+  },
+  {
+   "fieldname": "membership_profile_section",
+   "fieldtype": "Section Break",
+   "label": "Membership Profile"
+  },
+  {
+   "fieldname": "membership_status",
+   "fieldtype": "Select",
+   "label": "Membership Status",
+   "options": "Registered\nVisitor\nTransit\nExternal Catholic\nInactive",
+   "default": "Registered",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "is_minor",
+   "fieldtype": "Check",
+   "label": "Minor"
+  },
+  {
+   "fieldname": "guardian",
+   "fieldtype": "Link",
+   "label": "Guardian",
+   "options": "Parishioner",
+   "depends_on": "eval:doc.is_minor"
+  },
+  {
+   "fieldname": "home_parish",
+   "fieldtype": "Data",
+   "label": "Home Parish"
+  },
+  {
+   "fieldname": "visit_start",
+   "fieldtype": "Date",
+   "label": "Visit Start"
+  },
+  {
+   "fieldname": "visit_end",
+   "fieldtype": "Date",
+   "label": "Visit End"
   },
   {
    "fieldname": "movement_section",

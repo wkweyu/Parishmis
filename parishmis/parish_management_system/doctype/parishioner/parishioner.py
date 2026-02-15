@@ -9,7 +9,7 @@ import string
 import frappe
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
-from frappe.utils import cint
+from frappe.utils import cint, getdate
 from parishmis.api.portal_setup import ensure_portal_user
 
 PASSWORD_MIN_LENGTH = 10
@@ -53,41 +53,94 @@ def _generate_password() -> str:
 class Parishioner(Document):
     def validate(self):
         self._format_names()
-        
         prev = frappe._dict()
         if self.name:
             prev = frappe.db.get_value("Parishioner", self.name, ["church", "parish"], as_dict=True) or frappe._dict()
 
-        # Auto-generate code
+        self._ensure_parishioner_code()
+        self._ensure_membership_status()
+        self._apply_membership_rules()
+        self._require_guardian_if_minor()
+        self._validate_visit_dates()
+        self._validate_unique_contact()
+
+        if self.membership_status == "Registered":
+            self._validate_family_link()
+
+        self._validate_movement_memberships()
+        self._log_transfer_if_changed(prev.get("church"), prev.get("parish"))
+
+    def _ensure_parishioner_code(self):
         if not self.parishioner_code:
             self.parishioner_code = make_autoname("PRN-.#####")
 
-        # Require church and set parish from church
+    def _ensure_membership_status(self):
+        status = (self.membership_status or "").strip()
+        if not status:
+            status = "Registered"
+        self.membership_status = status
+
+    def _apply_membership_rules(self):
+        if self.membership_status == "Registered":
+            self._enforce_registered_membership()
+        else:
+            self._apply_non_registered_rules()
+
+    def _enforce_registered_membership(self):
         if not self.church:
-            frappe.throw("Church / Outstation is required for a Parishioner.")
-        
+            frappe.throw("Church / Outstation is required for registered parishioners.")
+        parish = self._set_parish_from_church()
+        self._validate_scc_against_parish(parish)
+        self._reset_visitor_fields()
+
+    def _apply_non_registered_rules(self):
+        if self.church:
+            self._set_parish_from_church()
+        else:
+            self.parish = None
+        self._clear_registered_only_links()
+
+    def _set_parish_from_church(self):
+        if not self.church:
+            self.parish = None
+            return None
         church_parish = frappe.db.get_value("Church", self.church, "parish")
         if not church_parish:
             frappe.throw("Selected church is missing a linked Parish; fix the church record first.")
         self.parish = church_parish
+        return church_parish
 
-        # Validate uniqueness of phone/email
-        self._validate_unique_contact()
+    def _validate_scc_against_parish(self, parish):
+        if not self.scc or not parish:
+            return
+        scc_parish = frappe.db.get_value("SCC", self.scc, "parish")
+        if scc_parish and scc_parish != parish:
+            frappe.throw("Selected SCC belongs to a different Parish than the Parishioner.")
 
-        # Optional: ensure SCC belongs to same parish
+    def _reset_visitor_fields(self):
+        for field in ("home_parish", "visit_start", "visit_end"):
+            if self.get(field):
+                self.set(field, None)
+
+    def _clear_registered_only_links(self):
         if self.scc:
-            scc_parish = frappe.db.get_value("SCC", self.scc, "parish")
-            if scc_parish and scc_parish != self.parish:
-                frappe.throw("Selected SCC belongs to a different Parish than the Parishioner.")
+            self.scc = None
+        if self.family:
+            self.family = None
 
-        # Optional: ensure Family belongs to same church/parish
-        self._validate_family_link()
+    def _require_guardian_if_minor(self):
+        if cint(self.is_minor):
+            if not self.guardian:
+                frappe.throw("Guardian is required when the parishioner is marked as a minor.")
+            if self.guardian == self.name:
+                frappe.throw("Parishioner cannot be their own guardian.")
+        elif self.guardian:
+            self.guardian = None
 
-        # Validate movement memberships
-        self._validate_movement_memberships()
-
-        # Log transfer when church changes
-        self._log_transfer_if_changed(prev.get("church"), prev.get("parish"))
+    def _validate_visit_dates(self):
+        if self.visit_start and self.visit_end:
+            if getdate(self.visit_end) < getdate(self.visit_start):
+                frappe.throw("Visit End cannot be before Visit Start.")
 
     def _validate_movement_memberships(self):
         active_movements = []

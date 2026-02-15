@@ -9,6 +9,7 @@ def execute(filters=None):
             SUM(CASE WHEN gender = 'Male' THEN 1 ELSE 0 END) AS total_male,
             SUM(CASE WHEN gender = 'Female' THEN 1 ELSE 0 END) AS total_female
         FROM `tabParishioner`
+        WHERE membership_status = 'Registered'
         """,
         as_dict=True,
     )

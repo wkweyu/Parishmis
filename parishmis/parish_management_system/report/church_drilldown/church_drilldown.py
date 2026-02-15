@@ -16,7 +16,7 @@ def execute(filters=None):
             SUM(CASE WHEN gender = 'Male' THEN 1 ELSE 0 END) AS total_male,
             SUM(CASE WHEN gender = 'Female' THEN 1 ELSE 0 END) AS total_female
         FROM `tabParishioner`
-        WHERE church = %(church)s
+        WHERE church = %(church)s AND membership_status = 'Registered'
         """,
         {"church": church},
         as_dict=True,

@@ -1,68 +1,277 @@
 {
   "doctype": "Workspace",
   "name": "Parish Management System",
-  "label": "Parish Management System",
-  "title": "Parish Management System",
-  "module": "Parish Management System",
+  "charts": [
+    "Members per Church",
+    "Members per SCC",
+    "Gender Split",
+    "Group Distribution"
+  ],
+  "content": [
+    {
+      "id": "header-structure",
+      "type": "header",
+      "data": {
+        "text": "<span class='h4'><b>Church Structure</b></span>",
+        "col": 12
+      }
+    },
+    {
+      "id": "shortcut-diocese",
+      "type": "shortcut",
+      "data": {
+        "label": "Diocese",
+        "link_to": "Diocese",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-parish",
+      "type": "shortcut",
+      "data": {
+        "label": "Parish",
+        "link_to": "Parish",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-sub-parish",
+      "type": "shortcut",
+      "data": {
+        "label": "Sub-Parish",
+        "link_to": "Sub-Parish",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-church",
+      "type": "shortcut",
+      "data": {
+        "label": "Church / Outstation",
+        "link_to": "Church",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "spacer-1",
+      "type": "spacer",
+      "data": { "col": 12 }
+    },
+    {
+      "id": "header-members",
+      "type": "header",
+      "data": {
+        "text": "<span class='h4'><b>Parishioners & Communities</b></span>",
+        "col": 12
+      }
+    },
+    {
+      "id": "shortcut-family",
+      "type": "shortcut",
+      "data": {
+        "label": "Family",
+        "link_to": "Family",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-parishioner",
+      "type": "shortcut",
+      "data": {
+        "label": "Parishioner",
+        "link_to": "Parishioner",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-scc",
+      "type": "shortcut",
+      "data": {
+        "label": "SCC",
+        "link_to": "SCC",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-membership",
+      "type": "shortcut",
+      "data": {
+        "label": "Membership",
+        "link_to": "Membership",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "spacer-2",
+      "type": "spacer",
+      "data": { "col": 12 }
+    },
+    {
+      "id": "header-sacraments",
+      "type": "header",
+      "data": {
+        "text": "<span class='h4'><b>Sacramental Records</b></span>",
+        "col": 12
+      }
+    },
+    {
+      "id": "shortcut-sacrament-type",
+      "type": "shortcut",
+      "data": {
+        "label": "Sacrament Type",
+        "link_to": "Sacrament Type",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-sacrament-record",
+      "type": "shortcut",
+      "data": {
+        "label": "Sacrament Record",
+        "link_to": "Sacrament Record",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "spacer-3",
+      "type": "spacer",
+      "data": { "col": 12 }
+    },
+    {
+      "id": "header-finance",
+      "type": "header",
+      "data": {
+        "text": "<span class='h4'><b>Collections & Contributions</b></span>",
+        "col": 12
+      }
+    },
+    {
+      "id": "shortcut-collection-type",
+      "type": "shortcut",
+      "data": {
+        "label": "Collection Type",
+        "link_to": "Collection Type",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-collection-record",
+      "type": "shortcut",
+      "data": {
+        "label": "Collection Record",
+        "link_to": "Collection Record",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-mpesa",
+      "type": "shortcut",
+      "data": {
+        "label": "M-Pesa Transaction",
+        "link_to": "M-Pesa Transaction",
+        "link_type": "DocType",
+        "col": 3
+      }
+    },
+    {
+      "id": "spacer-4",
+      "type": "spacer",
+      "data": { "col": 12 }
+    },
+    {
+      "id": "header-stats",
+      "type": "header",
+      "data": {
+        "text": "<span class='h4'><b>Statistics & Reports</b></span>",
+        "col": 12
+      }
+    },
+    {
+      "id": "shortcut-scc-member-count",
+      "type": "shortcut",
+      "data": {
+        "label": "SCC Member Count",
+        "link_to": "SCC Member Count",
+        "link_type": "Report",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-parishioners-per-church",
+      "type": "shortcut",
+      "data": {
+        "label": "Parishioners per Church",
+        "link_to": "Parishioners per Church",
+        "link_type": "Report",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-parishioners-per-group",
+      "type": "shortcut",
+      "data": {
+        "label": "Parishioners per Group",
+        "link_to": "Parishioners per Group",
+        "link_type": "Report",
+        "col": 3
+      }
+    },
+    {
+      "id": "shortcut-church-drilldown",
+      "type": "shortcut",
+      "data": {
+        "label": "Church Drilldown",
+        "link_to": "Church Drilldown",
+        "link_type": "Report",
+        "col": 3
+      }
+    },
+    {
+      "id": "spacer-5",
+      "type": "spacer",
+      "data": { "col": 12 }
+    },
+    {
+      "id": "header-events",
+      "type": "header",
+      "data": {
+        "text": "<span class='h4'><b>Events & Activities</b></span>",
+        "col": 12
+      }
+    },
+    {
+      "id": "shortcut-event",
+      "type": "shortcut",
+      "data": {
+        "label": "Event",
+        "link_to": "Event",
+        "link_type": "DocType",
+        "col": 3
+      }
+    }
+  ],
+  "public": 1,
+  "module": "Parish Management",
   "icon": "church",
   "indicator_color": "yellow",
-  "public": 1,
   "is_hidden": 0,
-  "sequence_id": 1.0,
-  "charts": [],
+  "label": "Parish Management System",
+  "is_editable": true,
+  "selected": true,
+  "title": "Parish Management System",
+  "links": [],
   "number_cards": [],
-  "quick_lists": [],
-  "custom_blocks": [],
-  "links": [
-    {"hidden": 0, "is_query_report": 0, "label": "Church Structure", "link_count": 3, "onboard": 0, "type": "Card Break"},
-    {"hidden": 0, "is_query_report": 0, "label": "Diocese", "link_to": "Diocese", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Parish", "link_to": "Parish", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Church", "link_to": "Church", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Leadership", "link_count": 1, "onboard": 0, "type": "Card Break"},
-    {"hidden": 0, "is_query_report": 0, "label": "Leadership Assignment", "link_to": "Leadership Assignment", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Parishioners & Communities", "link_count": 7, "onboard": 0, "type": "Card Break"},
-    {"hidden": 0, "is_query_report": 0, "label": "Family", "link_to": "Family", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Parishioner", "link_to": "Parishioner", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "SCC", "link_to": "SCC", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "SCC Member", "link_to": "SCC Member", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Membership", "link_to": "Membership", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Association", "link_to": "Association", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Association Member", "link_to": "Association Member", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Sacramental Records", "link_count": 3, "onboard": 0, "type": "Card Break"},
-    {"hidden": 0, "is_query_report": 0, "label": "Sacrament Type", "link_to": "Sacrament Type", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Sacrament Candidate", "link_to": "Sacrament Candidate", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Sacrament Record", "link_to": "Sacrament Record", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 1, "label": "Sacrament Candidates", "link_to": "Sacrament Candidates", "link_type": "Report", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 1, "label": "Sacrament Records", "link_to": "Sacrament Records", "link_type": "Report", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Collections & Contributions", "link_count": 3, "onboard": 0, "type": "Card Break"},
-    {"hidden": 0, "is_query_report": 0, "label": "Collection Type", "link_to": "Collection Type", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Collection Record", "link_to": "Collection", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "M-Pesa Transaction", "link_to": "M-Pesa Transaction", "link_type": "DocType", "onboard": 0, "type": "Link"},
-    {"hidden": 0, "is_query_report": 0, "label": "Events & Activities", "link_count": 1, "onboard": 0, "type": "Card Break"},
-    {"hidden": 0, "is_query_report": 0, "label": "Event", "link_to": "Event", "link_type": "DocType", "onboard": 0, "type": "Link"}
-  ],
-  "roles": [],
-  "shortcuts": [
-    {"label": "Diocese", "link_to": "Diocese", "type": "DocType"},
-    {"label": "Parish", "link_to": "Parish", "type": "DocType"},
-    {"label": "Church", "link_to": "Church", "type": "DocType"},
-    {"label": "Leadership Assignment", "link_to": "Leadership Assignment", "type": "DocType"},
-    {"label": "Family", "link_to": "Family", "type": "DocType"},
-    {"label": "Parishioner", "link_to": "Parishioner", "type": "DocType"},
-    {"label": "SCC", "link_to": "SCC", "type": "DocType"},
-    {"label": "SCC Member", "link_to": "SCC Member", "type": "DocType"},
-    {"label": "Membership", "link_to": "Membership", "type": "DocType"},
-    {"label": "Association", "link_to": "Association", "type": "DocType"},
-    {"label": "Association Member", "link_to": "Association Member", "type": "DocType"},
-    {"label": "Sacrament Type", "link_to": "Sacrament Type", "type": "DocType"},
-    {"label": "Sacrament Candidate", "link_to": "Sacrament Candidate", "type": "DocType"},
-    {"label": "Sacrament Record", "link_to": "Sacrament Record", "type": "DocType"},
-    {"label": "Sacrament Candidates Report", "link_to": "Sacrament Candidates", "type": "Report"},
-    {"label": "Sacrament Records Report", "link_to": "Sacrament Records", "type": "Report"},
-    {"label": "Collection Type", "link_to": "Collection Type", "type": "DocType"},
-    {"label": "Collection Record", "link_to": "Collection", "type": "DocType"},
-    {"label": "M-Pesa Transaction", "link_to": "M-Pesa Transaction", "type": "DocType"},
-    {"label": "Event", "link_to": "Event", "type": "DocType"}
-  ],
-  "content": "[{\"id\": \"header-structure\", \"type\": \"header\", \"data\": {\"text\": \"<b>Church Structure</b>\", \"col\": 12}}, {\"id\": \"shortcut-diocese\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Diocese\", \"col\": 3}}, {\"id\": \"shortcut-parish\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Parish\", \"col\": 3}}, {\"id\": \"shortcut-church\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Church\", \"col\": 3}}, {\"id\": \"spacer-1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header-leadership\", \"type\": \"header\", \"data\": {\"text\": \"<b>Leadership</b>\", \"col\": 12}}, {\"id\": \"shortcut-leadership\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Leadership Assignment\", \"col\": 3}}, {\"id\": \"spacer-1b\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header-members\", \"type\": \"header\", \"data\": {\"text\": \"<b>Parishioners & Communities</b>\", \"col\": 12}}, {\"id\": \"shortcut-family\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Family\", \"col\": 3}}, {\"id\": \"shortcut-parishioner\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Parishioner\", \"col\": 3}}, {\"id\": \"shortcut-scc\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"SCC\", \"col\": 3}}, {\"id\": \"shortcut-scc-member\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"SCC Member\", \"col\": 3}}, {\"id\": \"shortcut-membership\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Membership\", \"col\": 3}}, {\"id\": \"shortcut-association\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Association\", \"col\": 3}}, {\"id\": \"shortcut-association-member\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Association Member\", \"col\": 3}}, {\"id\": \"spacer-2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header-sacraments\", \"type\": \"header\", \"data\": {\"text\": \"<b>Sacramental Records</b>\", \"col\": 12}}, {\"id\": \"shortcut-sacrament-type\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sacrament Type\", \"col\": 3}}, {\"id\": \"shortcut-sacrament-candidate\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sacrament Candidate\", \"col\": 3}}, {\"id\": \"shortcut-sacrament-record\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sacrament Record\", \"col\": 3}}, {\"id\": \"shortcut-sacrament-candidate-report\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sacrament Candidates Report\", \"col\": 3}}, {\"id\": \"shortcut-sacrament-records-report\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sacrament Records Report\", \"col\": 3}}, {\"id\": \"spacer-3\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header-finance\", \"type\": \"header\", \"data\": {\"text\": \"<b>Collections & Contributions</b>\", \"col\": 12}}, {\"id\": \"shortcut-collection-type\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Collection Type\", \"col\": 3}}, {\"id\": \"shortcut-collection-record\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Collection Record\", \"col\": 3}}, {\"id\": \"shortcut-mpesa\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"M-Pesa Transaction\", \"col\": 3}}, {\"id\": \"spacer-4\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header-events\", \"type\": \"header\", \"data\": {\"text\": \"<b>Events & Activities</b>\", \"col\": 12}}, {\"id\": \"shortcut-event\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Event\", \"col\": 3}}]"
+  "roles": []
 }

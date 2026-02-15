@@ -1,0 +1,20 @@
+{
+ "chart_name": "Gender Split",
+ "chart_type": "Report",
+ "doctype": "Dashboard Chart",
+ "is_standard": 1,
+ "module": "Parish Management System",
+ "report_name": "Parishioner Statistics Dashboard",
+ "type": "Pie",
+ "use_report_chart": 0,
+ "x_field": "metric",
+ "y_axis": [
+  {
+   "color": "#38bdf8",
+   "label": "Count",
+   "y_field": "value"
+  }
+ ],
+ "filters_json": "[[\"metric\",\"in\",[\"Total Male\",\"Total Female\"]]]",
+ "is_public": 1
+}

@@ -1,0 +1,19 @@
+{
+ "chart_name": "Members per Church",
+ "chart_type": "Report",
+ "doctype": "Dashboard Chart",
+ "is_standard": 1,
+ "module": "Parish Management System",
+ "report_name": "Parishioners per Church",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "x_field": "church",
+ "y_axis": [
+  {
+   "color": "#f97316",
+   "label": "Members",
+   "y_field": "total_members"
+  }
+ ],
+ "is_public": 1
+}

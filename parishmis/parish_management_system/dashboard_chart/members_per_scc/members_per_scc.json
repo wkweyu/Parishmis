@@ -1,0 +1,19 @@
+{
+ "chart_name": "Members per SCC",
+ "chart_type": "Report",
+ "doctype": "Dashboard Chart",
+ "is_standard": 1,
+ "module": "Parish Management System",
+ "report_name": "SCC Member Count",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "x_field": "scc",
+ "y_axis": [
+  {
+   "color": "#22c55e",
+   "label": "Members",
+   "y_field": "total_members"
+  }
+ ],
+ "is_public": 1
+}

@@ -12,6 +12,7 @@ class SCC(Document):
         if not self.church:
             frappe.throw("Please select a Church / Outstation for this SCC.")
         self._set_parish_from_church()
+        self._validate_unique_per_church()
         self._ensure_code()
 
     def _format_names(self):
@@ -31,3 +32,17 @@ class SCC(Document):
     def _ensure_code(self):
         if not getattr(self, "code", None):
             self.code = make_autoname("SCC-.#####")
+
+    def _validate_unique_per_church(self):
+        if not (self.church and self.scc_name):
+            return
+        duplicate = frappe.db.exists(
+            "SCC",
+            {
+                "church": self.church,
+                "scc_name": self.scc_name,
+                "name": ("!=", self.name),
+            },
+        )
+        if duplicate:
+            frappe.throw("SCC Name must be unique within the selected Church.")

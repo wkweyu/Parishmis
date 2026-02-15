@@ -35,9 +35,6 @@ def fix_parish_workspace() -> None:
         content_str = str(content)
 
     ws = frappe.get_doc("Workspace", "Parish Management System")
-
-    # Keep module aligned in case it was saved with an old name
-    ws.module = "Parish Management System"
     ws.content = content_str
     ws.save()
     frappe.db.commit()

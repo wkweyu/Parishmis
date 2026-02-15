@@ -1,5 +1,6 @@
 {
  "chart_name": "Members per SCC",
+ "name": "Members per SCC",
  "chart_type": "Report",
  "doctype": "Dashboard Chart",
  "is_standard": 1,
@@ -7,6 +8,7 @@
  "report_name": "SCC Member Count",
  "type": "Bar",
  "use_report_chart": 0,
+ "filters_json": "[]",
  "x_field": "scc",
  "y_axis": [
   {

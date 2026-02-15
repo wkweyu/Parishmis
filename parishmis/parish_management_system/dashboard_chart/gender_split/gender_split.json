@@ -1,5 +1,6 @@
 {
  "chart_name": "Gender Split",
+ "name": "Gender Split",
  "chart_type": "Report",
  "doctype": "Dashboard Chart",
  "is_standard": 1,

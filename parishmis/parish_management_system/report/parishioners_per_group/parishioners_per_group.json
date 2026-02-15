@@ -22,7 +22,7 @@
  "owner": "Administrator",
  "ref_doctype": "Membership",
  "report_name": "Parishioners per Group",
- "report_type": "Query Report",
+ "report_type": "Script Report",
  "roles": [
   {"role": "System Manager"},
   {"role": "Parish Admin"}

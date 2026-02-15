@@ -15,7 +15,7 @@
  "owner": "Administrator",
  "ref_doctype": "Parishioner",
  "report_name": "Parishioners per Church",
- "report_type": "Query Report",
+ "report_type": "Script Report",
  "roles": [
   {"role": "System Manager"},
   {"role": "Parish Admin"}

@@ -14,9 +14,9 @@ def get_columns():
         {"label": _("Full Name"), "fieldname": "full_name", "fieldtype": "Data", "width": 200},
         {"label": _("Gender"), "fieldname": "gender", "fieldtype": "Data", "width": 100},
         {"label": _("Phone"), "fieldname": "phone_number", "fieldtype": "Data", "width": 120},
-        {"label": _("Church"), "fieldname": "church", "fieldtype": "Link", "options": "Church", "width": 150},
-        {"label": _("SCC"), "fieldname": "scc", "fieldtype": "Link", "options": "SCC", "width": 150},
-        {"label": _("Parish"), "fieldname": "parish", "fieldtype": "Link", "options": "Parish", "width": 150},
+        {"label": _("Church"), "fieldname": "church_name", "fieldtype": "Data", "width": 150},
+        {"label": _("SCC"), "fieldname": "scc_name", "fieldtype": "Data", "width": 150},
+        {"label": _("Parish"), "fieldname": "parish_name", "fieldtype": "Data", "width": 150},
         {"label": _("Reg. Date"), "fieldname": "creation_date", "fieldtype": "Date", "width": 110},
     ]
 
@@ -68,12 +68,15 @@ def get_data(filters):
             p.full_name,
             p.gender,
             p.phone_number,
-            p.church,
-            p.scc,
-            p.parish,
+            c.church_name,
+            s.scc_name,
+            pr.parish_name,
             DATE(p.creation) as creation_date
         FROM
             `tabParishioner` p
+        LEFT JOIN `tabChurch` c ON p.church = c.name
+        LEFT JOIN `tabSCC` s ON p.scc = s.name
+        LEFT JOIN `tabParish` pr ON p.parish = pr.name
         {sacrament_join}
         {where_clause}
         ORDER BY p.full_name ASC

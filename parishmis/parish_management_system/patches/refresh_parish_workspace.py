@@ -64,9 +64,7 @@ def execute():
             continue
 
         data = block.get("data") or {}
-        label = data.get("label") or data.get("shortcut_name")
-        if label in doc_map:
-            data["link_to"] = doc_map[label]
+        label = data.get("shortcut_name") or data.get("label")
         if label in valid_labels:
             filtered_blocks.append(block)
 

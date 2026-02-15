@@ -10,7 +10,8 @@ def execute():
         "Parishioners per Church",
         "Parishioners per Group",
         "Parishioner Statistics Dashboard",
-        "Church Drilldown"
+        "Church Drilldown",
+        "Detailed Parishioner List"
     ]
 
     for report_name in reports_to_fix:

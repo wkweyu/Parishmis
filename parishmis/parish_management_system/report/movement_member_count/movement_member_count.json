@@ -1,0 +1,30 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2026-02-15 21:15:00.000000",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "parish",
+   "fieldtype": "Link",
+   "label": "Parish",
+   "options": "Parish"
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2026-02-15 21:15:00.000000",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Movement Member Count",
+ "owner": "Administrator",
+ "ref_doctype": "Movement",
+ "report_name": "Movement Member Count",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Parish Admin"}
+ ]
+}

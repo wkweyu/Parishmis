@@ -132,7 +132,18 @@
    "label": "System Info",
    "fieldtype": "Section Break"
   },
-    {"fieldname": "user_account", "label": "Linked User", "fieldtype": "Link", "options": "User"},
+  {"fieldname": "user_account", "label": "Linked User", "fieldtype": "Link", "options": "User"},
+  {
+   "fieldname": "lay_movements_section",
+   "label": "Lay Movements & Apostolates",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "movement_memberships",
+   "label": "Movements",
+   "fieldtype": "Table",
+   "options": "Movement Member"
+  },
   {
    "fieldname": "notes",
    "label": "Notes",

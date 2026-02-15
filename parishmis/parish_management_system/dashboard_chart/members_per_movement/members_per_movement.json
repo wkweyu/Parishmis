@@ -1,0 +1,21 @@
+{
+ "chart_name": "Members per Movement",
+ "name": "Members per Movement",
+ "chart_type": "Report",
+ "doctype": "Dashboard Chart",
+ "is_standard": 1,
+ "module": "Parish Management System",
+ "report_name": "Movement Member Count",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "x_field": "movement",
+ "y_axis": [
+  {
+   "color": "#6366f1",
+   "label": "Members",
+   "y_field": "total_members"
+  }
+ ],
+ "filters_json": "{}",
+ "is_public": 1
+}

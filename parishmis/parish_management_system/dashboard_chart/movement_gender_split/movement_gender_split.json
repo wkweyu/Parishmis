@@ -1,0 +1,26 @@
+{
+ "chart_name": "Movement Gender Split",
+ "name": "Movement Gender Split",
+ "chart_type": "Report",
+ "doctype": "Dashboard Chart",
+ "is_standard": 1,
+ "module": "Parish Management System",
+ "report_name": "Movement Member Count",
+ "type": "Pie",
+ "use_report_chart": 0,
+ "x_field": "movement",
+ "y_axis": [
+  {
+   "color": "#ec4899",
+   "label": "Female",
+   "y_field": "female"
+  },
+  {
+   "color": "#3b82f6",
+   "label": "Male",
+   "y_field": "male"
+  }
+ ],
+ "filters_json": "{}",
+ "is_public": 1
+}

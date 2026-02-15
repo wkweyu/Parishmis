@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-15 21:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "movement_name",
+  "parish",
+  "church",
+  "scope",
+  "is_active",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "movement_name",
+   "fieldtype": "Data",
+   "label": "Movement Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "parish",
+   "fieldtype": "Link",
+   "label": "Parish",
+   "options": "Parish",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "church",
+   "fieldtype": "Link",
+   "label": "Church",
+   "options": "Church",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "scope",
+   "fieldtype": "Select",
+   "label": "Scope",
+   "options": "Parish\nChurch\nSCC",
+   "default": "Parish",
+   "in_list_view": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-15 21:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Parish Management System",
+ "name": "Movement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Parish Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "movement_name, parish, church",
+ "sort_field": "movement_name",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "movement_name"
+}

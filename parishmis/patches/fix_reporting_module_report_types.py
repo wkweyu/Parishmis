@@ -11,7 +11,10 @@ def execute():
         "Parishioners per Group",
         "Parishioner Statistics Dashboard",
         "Church Drilldown",
-        "Detailed Parishioner List"
+        "Detailed Parishioner List",
+        "Movement Member Count",
+        "Movement Leaders",
+        "Parishioners Without Movement"
     ]
 
     for report_name in reports_to_fix:

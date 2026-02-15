@@ -83,8 +83,22 @@ class Parishioner(Document):
         # Optional: ensure Family belongs to same church/parish
         self._validate_family_link()
 
+        # Validate movement memberships
+        self._validate_movement_memberships()
+
         # Log transfer when church changes
         self._log_transfer_if_changed(prev.get("church"), prev.get("parish"))
+
+    def _validate_movement_memberships(self):
+        active_movements = []
+        for row in self.get("movement_memberships") or []:
+            if row.status == "Active":
+                if row.movement in active_movements:
+                    frappe.throw(f"Parishioner cannot have more than one active membership in movement: {row.movement}")
+                active_movements.append(row.movement)
+            
+            if row.date_left:
+                row.status = "Inactive"
 
     def _format_names(self):
         """Format names to Title Case and update full_name"""

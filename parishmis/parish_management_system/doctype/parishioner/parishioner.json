@@ -25,6 +25,8 @@
   "movement_section",
   "current_status",
   "transfer_history",
+  "lay_movements_section",
+  "movement_memberships",
   "system_section",
   "user_account",
   "notes"

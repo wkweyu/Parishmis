@@ -18,6 +18,7 @@ const ROLE_MAP = {
 	Church: ['Chairperson', 'Treasurer', 'Secretary', 'Catechist'],
 	SCC: ['SCC Leader', 'Assistant Leader', 'Secretary', 'Treasurer'],
 	Association: ['Association Chair', 'Secretary', 'Treasurer', 'Coordinator'],
+	Movement: ['Chairperson', 'Vice-Chairperson', 'Secretary', 'Treasurer', 'Coordinator', 'Spiritual Director'],
 };
 
 function set_role_options(frm) {

@@ -35,6 +35,14 @@ class LeadershipAssignment(Document):
 			"Treasurer",
 			"Coordinator",
 		},
+		"Movement": {
+			"Chairperson",
+			"Vice-Chairperson",
+			"Secretary",
+			"Treasurer",
+			"Coordinator",
+			"Spiritual Director",
+		},
 	}
 
 	def _validate_role_against_reference(self):

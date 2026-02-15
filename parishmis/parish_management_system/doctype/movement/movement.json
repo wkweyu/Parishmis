@@ -7,7 +7,6 @@
  "field_order": [
   "movement_name",
   "parish",
-  "church",
   "scope",
   "is_active",
   "description"
@@ -25,14 +24,6 @@
    "fieldtype": "Link",
    "label": "Parish",
    "options": "Parish",
-   "in_list_view": 1,
-   "in_standard_filter": 1
-  },
-  {
-   "fieldname": "church",
-   "fieldtype": "Link",
-   "label": "Church",
-   "options": "Church",
    "in_list_view": 1,
    "in_standard_filter": 1
   },

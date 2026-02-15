@@ -8,7 +8,7 @@
  "report_name": "Parishioners per Church",
  "type": "Bar",
  "use_report_chart": 0,
- "filters_json": "[]",
+ "filters_json": "{}",
  "x_field": "church",
  "y_axis": [
   {

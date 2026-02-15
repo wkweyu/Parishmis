@@ -8,7 +8,7 @@
  "report_name": "SCC Member Count",
  "type": "Bar",
  "use_report_chart": 0,
- "filters_json": "[]",
+ "filters_json": "{}",
  "x_field": "scc",
  "y_axis": [
   {

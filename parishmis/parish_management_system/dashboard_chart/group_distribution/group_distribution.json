@@ -8,7 +8,7 @@
  "report_name": "Parishioners per Group",
  "type": "Pie",
  "use_report_chart": 0,
- "filters_json": "[]",
+ "filters_json": "{}",
  "x_field": "group_type",
  "y_axis": [
   {

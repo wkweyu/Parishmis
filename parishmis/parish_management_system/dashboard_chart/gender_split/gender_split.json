@@ -16,6 +16,6 @@
    "y_field": "value"
   }
  ],
- "filters_json": "[[\"metric\",\"in\",[\"Total Male\",\"Total Female\"]]]",
+ "filters_json": "{}",
  "is_public": 1
 }

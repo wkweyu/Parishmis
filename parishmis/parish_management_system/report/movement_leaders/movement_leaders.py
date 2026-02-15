@@ -29,7 +29,7 @@ def get_data(filters):
             p.full_name as parishioner_name,
             p.phone_number as phone
         FROM `tabMovement Member` mm
-        INNER JOIN `tabParishioner` p ON p.name = mm.parent
+        INNER JOIN `tabParishioner` p ON p.name = mm.parent AND p.membership_status = 'Registered'
         WHERE mm.status = 'Active' {conditions}
         ORDER BY mm.movement, mm.role
         """,

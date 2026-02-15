@@ -21,7 +21,7 @@ def execute(filters=None):
             SUM(CASE WHEN p.gender = 'Female' THEN 1 ELSE 0 END) AS female
         FROM `tabSCC` scc
         LEFT JOIN `tabParishioner` p
-            ON p.scc = scc.name
+            ON p.scc = scc.name AND p.membership_status = 'Registered'
         {where}
         GROUP BY scc.church, scc.name
         ORDER BY scc.church, scc.name

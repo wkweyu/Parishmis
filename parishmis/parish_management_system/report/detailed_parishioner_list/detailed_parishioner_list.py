@@ -61,6 +61,8 @@ def get_data(filters):
     where_clause = ""
     if conditions:
         where_clause = " WHERE " + " AND ".join(conditions)
+    else:
+        where_clause = " WHERE p.membership_status = 'Registered' "
 
     query = f"""
         SELECT

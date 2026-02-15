@@ -29,7 +29,7 @@ def get_data(filters):
             SUM(CASE WHEN p.gender = 'Male' THEN 1 ELSE 0 END) as male,
             SUM(CASE WHEN p.gender = 'Female' THEN 1 ELSE 0 END) as female
         FROM `tabMovement Member` mm
-        INNER JOIN `tabParishioner` p ON p.name = mm.parent
+        INNER JOIN `tabParishioner` p ON p.name = mm.parent AND p.membership_status = 'Registered'
         INNER JOIN `tabMovement` m ON m.name = mm.movement
         WHERE mm.status = 'Active' {conditions}
         GROUP BY mm.movement

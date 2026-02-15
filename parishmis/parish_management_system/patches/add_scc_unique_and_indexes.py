@@ -15,7 +15,7 @@ def _add_index(table: str, index_name: str, columns: list[str], unique: bool = F
         return
     column_sql = ", ".join(f"`{col}`" for col in columns)
     unique_sql = "UNIQUE " if unique else ""
-    frappe.db.sql(
+    frappe.db.sql_ddl(
         f"ALTER TABLE `{table}` ADD {unique_sql}INDEX `{index_name}` ({column_sql})"
     )
 

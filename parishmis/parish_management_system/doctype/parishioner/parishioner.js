@@ -3,6 +3,7 @@
 
 frappe.ui.form.on("Parishioner", {
 	refresh(frm) {
+		configure_membership_grid(frm);
 		if (frm.is_new()) {
 			return;
 		}
@@ -102,4 +103,42 @@ frappe.ui.form.on("Parishioner", {
 			);
 		});
 	},
+	movement_memberships_add(frm, cdt, cdn) {
+		set_membership_defaults(frm, cdt, cdn);
+	},
 });
+
+frappe.ui.form.on("Movement Member", {
+	form_render(frm, cdt, cdn) {
+		set_membership_defaults(frm, cdt, cdn);
+	},
+	movement(frm, cdt, cdn) {
+		set_membership_defaults(frm, cdt, cdn);
+	},
+	date_left(frm, cdt, cdn) {
+		const row = locals[cdt][cdn];
+		if (row?.date_left) {
+			frappe.model.set_value(cdt, cdn, "status", "Inactive");
+		}
+	},
+});
+
+function configure_membership_grid(frm) {
+	const grid = frm.fields_dict?.movement_memberships?.grid;
+	if (!grid) {
+		return;
+	}
+	grid.toggle_enable("parishioner", false);
+	grid.toggle_display("parishioner", false);
+}
+
+function set_membership_defaults(frm, cdt, cdn) {
+	if (!frm?.doc?.name) {
+		return;
+	}
+	frappe.model.set_value(cdt, cdn, "parishioner", frm.doc.name);
+	const row = locals[cdt][cdn];
+	if (!row?.status) {
+		frappe.model.set_value(cdt, cdn, "status", "Active");
+	}
+}

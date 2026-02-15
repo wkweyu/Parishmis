@@ -19,8 +19,9 @@
    "fieldtype": "Link",
    "label": "Parishioner",
    "options": "Parishioner",
-   "reqd": 1,
-   "in_list_view": 1
+    "reqd": 1,
+    "read_only": 1,
+    "hidden": 1
   },
   {
    "fieldname": "movement",
@@ -34,7 +35,7 @@
    "fieldname": "role",
    "fieldtype": "Select",
    "label": "Role",
-   "options": "Member\nChair\nSecretary\nTreasurer",
+    "options": "Member\nCommittee Member",
    "default": "Member",
    "in_list_view": 1
   },

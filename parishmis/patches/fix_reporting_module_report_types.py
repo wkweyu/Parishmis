@@ -14,7 +14,8 @@ def execute():
         "Detailed Parishioner List",
         "Movement Member Count",
         "Movement Leaders",
-        "Parishioners Without Movement"
+        "Parishioners Without Movement",
+        "Movement Growth by Year"
     ]
 
     for report_name in reports_to_fix:

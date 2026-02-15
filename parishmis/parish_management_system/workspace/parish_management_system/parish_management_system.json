@@ -2,10 +2,26 @@
   "doctype": "Workspace",
   "name": "Parish Management System",
   "charts": [
-    "Members per Church",
-    "Members per SCC",
-    "Gender Split",
-    "Group Distribution"
+    {
+      "doctype": "Workspace Chart",
+      "chart_name": "Members per Church",
+      "label": "Members per Church"
+    },
+    {
+      "doctype": "Workspace Chart",
+      "chart_name": "Members per SCC",
+      "label": "Members per SCC"
+    },
+    {
+      "doctype": "Workspace Chart",
+      "chart_name": "Gender Split",
+      "label": "Gender Split"
+    },
+    {
+      "doctype": "Workspace Chart",
+      "chart_name": "Group Distribution",
+      "label": "Group Distribution"
+    }
   ],
   "content": [
     {

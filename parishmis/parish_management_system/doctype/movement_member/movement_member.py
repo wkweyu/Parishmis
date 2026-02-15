@@ -4,8 +4,7 @@ from frappe.model.document import Document
 class MovementMember(Document):
     def validate(self):
         self.validate_dates()
-        # Logic for status auto-setting is better handled here if it's a standalone doc
-        # but since it's a child table, we'll ensure it's called.
+        self.check_duplicate_active_membership()
         if self.date_left:
             self.status = "Inactive"
 
@@ -13,3 +12,14 @@ class MovementMember(Document):
         if self.date_joined and self.date_left:
             if frappe.utils.getdate(self.date_left) < frappe.utils.getdate(self.date_joined):
                 frappe.throw("Date Left cannot be before Date Joined")
+
+    def check_duplicate_active_membership(self):
+        if self.status == "Active":
+            duplicate = frappe.db.exists("Movement Member", {
+                "parishioner": self.parishioner,
+                "movement": self.movement,
+                "status": "Active",
+                "name": ["!=", self.name]
+            })
+            if duplicate:
+                frappe.throw(f"Parishioner {self.parishioner} is already an active member of {self.movement}")

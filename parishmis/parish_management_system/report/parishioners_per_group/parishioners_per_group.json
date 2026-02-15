@@ -10,7 +10,25 @@
    "fieldname": "group_type",
    "fieldtype": "Select",
    "label": "Group Type",
-   "options": "CWA\nCMA\nYouth\nOther"
+   "options": "SCC\nCWA\nCMA\nLegion\nOther"
+  },
+  {
+   "fieldname": "group",
+   "fieldtype": "Link",
+   "label": "Group",
+   "options": "Group"
+  },
+  {
+   "fieldname": "parish",
+   "fieldtype": "Link",
+   "label": "Parish",
+   "options": "Parish"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Membership Status",
+   "options": "Active\nInactive"
   }
  ],
  "idx": 0,

@@ -19,7 +19,6 @@
    "fieldtype": "Link",
    "label": "Parishioner",
    "options": "Parishioner",
-    "reqd": 1,
     "read_only": 1,
     "hidden": 1
   },

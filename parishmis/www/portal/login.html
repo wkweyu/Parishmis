@@ -18,12 +18,19 @@
         };
     </script>
     <style>
+        .navbar,
+        .web-header,
+        nav {
+            display: none !important;
+        }
         body,
         .web-page-wrapper,
         .page-wrapper,
         .page-content-wrapper,
         .page-content {
             background: #020617 !important;
+            margin: 0 !important;
+            padding-top: 0 !important;
         }
         .page-breadcrumb,
         .page-header,
@@ -40,7 +47,7 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="min-h-screen bg-slate-950 px-4 py-10 text-slate-50 font-body">
+<div class="min-h-screen bg-slate-950 px-4 py-6 text-slate-50 font-body sm:py-8">
     <div class="mx-auto max-w-md">
         <div class="rounded-3xl border border-white/10 bg-slate-900/80 p-6 shadow-2xl">
             <p class="text-xs uppercase tracking-[0.35em] text-amber-300">ParishMIS</p>

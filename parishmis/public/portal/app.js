@@ -7,6 +7,8 @@
     churchChip: '[data-church-chip]',
     contributionTotal: '[data-contribution-total]',
     contributionsList: '[data-recent-contributions]',
+    movementsList: '[data-movements-list]',
+    leadershipList: '[data-leadership-list]',
     sacramentsList: '[data-recent-sacraments]',
     announcementsList: '[data-recent-announcements]',
     activitiesList: '[data-upcoming-activities]',
@@ -164,6 +166,59 @@
       .join('');
   }
 
+  function renderMovements(list) {
+    const container = document.querySelector(selectors.movementsList);
+    if (!container) return;
+    if (!list?.length) {
+      container.innerHTML = '<p class="text-sm text-slate-400">No lay movement or apostolate memberships recorded.</p>';
+      return;
+    }
+
+    container.innerHTML = list.slice(0, 6)
+      .map(
+        (row) => `
+          <article class="rounded-2xl bg-slate-900/40 px-4 py-3">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-sm font-semibold">${row.movement_name || row.movement || 'Movement'}</p>
+                <p class="text-xs uppercase tracking-[0.25em] text-amber-200">${row.scope || 'Parish'}</p>
+              </div>
+              <span class="rounded-full border border-white/10 px-2 py-1 text-[11px] ${row.status === 'Active' ? 'text-emerald-200' : 'text-slate-300'}">${row.status || '—'}</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-300">Role: ${row.role || 'Member'}</p>
+            <p class="text-xs text-slate-400">Joined ${fmtDate(row.date_joined)}${row.date_left ? ` · Left ${fmtDate(row.date_left)}` : ''}</p>
+            ${row.movement_description ? `<p class="mt-2 text-xs text-slate-400">${row.movement_description}</p>` : ''}
+          </article>`
+      )
+      .join('');
+  }
+
+  function renderLeadership(list) {
+    const container = document.querySelector(selectors.leadershipList);
+    if (!container) return;
+    if (!list?.length) {
+      container.innerHTML = '<p class="text-sm text-slate-400">No current leadership assignments recorded.</p>';
+      return;
+    }
+
+    container.innerHTML = list.slice(0, 8)
+      .map(
+        (row) => `
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-sm font-semibold">${row.role || 'Leader'}</p>
+                <p class="text-xs uppercase tracking-[0.25em] text-amber-200">${row.reference_doctype || 'Ministry'}</p>
+              </div>
+              <span class="text-xs text-slate-400">${fmtDate(row.from_date)}</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-200">${row.reference_label || row.reference_name || '—'}</p>
+            ${row.to_date ? `<p class="text-xs text-slate-400">Until ${fmtDate(row.to_date)}</p>` : '<p class="text-xs text-emerald-200">Current assignment</p>'}
+          </article>`
+      )
+      .join('');
+  }
+
   function renderSacraments(records) {
     const container = document.querySelector(selectors.sacramentsList);
     if (!container) return;
@@ -235,6 +290,8 @@
       state.bootstrap = data;
       renderProfile(data.profile);
       renderContributions(data.contributions);
+      renderMovements(data.movements);
+      renderLeadership(data.leadership);
       renderSacraments(data.sacraments?.records);
       renderAnnouncements(data.announcements);
       renderActivities(data.activities);

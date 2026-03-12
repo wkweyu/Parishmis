@@ -26,6 +26,7 @@ def _get_parishioner_context():
         "family",
         "phone_number",
         "email",
+        "user_account",
         "gender",
         "date_of_birth",
     ]
@@ -152,6 +153,148 @@ def _build_profile(ctx):
         "family": family_details,
         "scc_memberships": memberships,
     }
+
+
+def _build_movement_memberships(ctx):
+    memberships = frappe.db.get_all(
+        "Movement Member",
+        filters={"parishioner": ctx.get("name")},
+        fields=["name", "movement", "role", "status", "date_joined", "date_left", "notes"],
+        order_by="modified desc",
+        ignore_permissions=True,
+    )
+
+    movement_ids = [row.get("movement") for row in memberships if row.get("movement")]
+    movement_map = {}
+    if movement_ids:
+        movement_map = {
+            row.name: row
+            for row in frappe.db.get_all(
+                "Movement",
+                filters={"name": ("in", movement_ids)},
+                fields=["name", "movement_name", "scope", "parish", "description", "is_active"],
+                ignore_permissions=True,
+            )
+        }
+
+    for row in memberships:
+        movement = movement_map.get(row.get("movement")) or {}
+        row["movement_name"] = movement.get("movement_name") or row.get("movement")
+        row["scope"] = movement.get("scope")
+        row["movement_description"] = movement.get("description")
+        row["movement_is_active"] = movement.get("is_active")
+        parish = movement.get("parish")
+        if parish:
+            row["parish"] = parish
+            row["parish_name"] = frappe.db.get_value("Parish", parish, "parish_name")
+
+    return memberships
+
+
+def _build_leadership_roles(ctx):
+    today = getdate(nowdate())
+
+    assignments = frappe.db.get_all(
+        "Leadership Assignment",
+        filters={
+            "is_current": 1,
+            "person_doctype": "Parishioner",
+            "person": ctx.get("name"),
+        },
+        fields=["name", "reference_doctype", "reference_name", "role", "from_date", "to_date"],
+        order_by="from_date desc, modified desc",
+        ignore_permissions=True,
+    )
+
+    if ctx.get("user_account"):
+        user_assignments = frappe.db.get_all(
+            "Leadership Assignment",
+            filters={
+                "is_current": 1,
+                "person_doctype": "User",
+                "person": ctx.get("user_account"),
+            },
+            fields=["name", "reference_doctype", "reference_name", "role", "from_date", "to_date"],
+            order_by="from_date desc, modified desc",
+            ignore_permissions=True,
+        )
+        assignments.extend(user_assignments)
+
+    assignments = [
+        row for row in assignments if not row.get("to_date") or getdate(row.get("to_date")) >= today
+    ]
+
+    ref_map = {
+        "Parish": "parish_name",
+        "Church": "church_name",
+        "SCC": "scc_name",
+        "Movement": "movement_name",
+        "Association": "association_name",
+    }
+
+    for doctype, title_field in ref_map.items():
+        names = [row.get("reference_name") for row in assignments if row.get("reference_doctype") == doctype]
+        if not names:
+            continue
+        records = frappe.db.get_all(
+            doctype,
+            filters={"name": ("in", names)},
+            fields=["name", title_field],
+            ignore_permissions=True,
+        )
+        title_lookup = {row.name: row.get(title_field) for row in records}
+        for row in assignments:
+            if row.get("reference_doctype") == doctype:
+                row["reference_label"] = title_lookup.get(row.get("reference_name")) or row.get("reference_name")
+
+    scc_roles = frappe.db.get_all(
+        "SCC Member",
+        filters={"parishioner": ctx.get("name"), "is_active": 1},
+        fields=["name", "scc", "role", "join_date"],
+        order_by="join_date desc",
+        ignore_permissions=True,
+    )
+
+    scc_ids = [row.get("scc") for row in scc_roles if row.get("scc")]
+    scc_lookup = {}
+    if scc_ids:
+        scc_lookup = {
+            row.name: row.scc_name
+            for row in frappe.db.get_all(
+                "SCC",
+                filters={"name": ("in", scc_ids)},
+                fields=["name", "scc_name"],
+                ignore_permissions=True,
+            )
+        }
+
+    extra_roles = []
+    for row in scc_roles:
+        role = (row.get("role") or "").strip()
+        if not role or role == "Member":
+            continue
+        extra_roles.append(
+            {
+                "name": row.get("name"),
+                "reference_doctype": "SCC",
+                "reference_name": row.get("scc"),
+                "reference_label": scc_lookup.get(row.get("scc")) or row.get("scc"),
+                "role": role,
+                "from_date": row.get("join_date"),
+                "to_date": None,
+            }
+        )
+
+    combined = []
+    seen = set()
+    for row in assignments + extra_roles:
+        key = (row.get("reference_doctype"), row.get("reference_name"), row.get("role"))
+        if key in seen:
+            continue
+        seen.add(key)
+        combined.append(row)
+
+    return combined
 
 
 def _build_family_members(ctx):
@@ -328,6 +471,8 @@ def get_portal_bootstrap():
     ctx = _get_parishioner_context()
     return {
         "profile": _build_profile(ctx),
+        "movements": _build_movement_memberships(ctx),
+        "leadership": _build_leadership_roles(ctx),
         "family": _build_family_members(ctx),
         "sacraments": _build_sacrament_history(ctx, limit=25),
         "contributions": _build_contribution_history(ctx, limit=25),

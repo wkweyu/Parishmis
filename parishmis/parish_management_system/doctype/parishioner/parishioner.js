@@ -180,7 +180,7 @@ function validate_visit_dates_client(frm) {
 }
 
 function set_membership_defaults(frm, cdt, cdn) {
-	if (!frm?.doc?.name) {
+	if (!frm?.doc?.name || frm.doc.__islocal) {
 		return;
 	}
 	frappe.model.set_value(cdt, cdn, "parishioner", frm.doc.name);

@@ -358,9 +358,9 @@
     if (!logoutLink) return;
     logoutLink.addEventListener('click', (event) => {
       event.preventDefault();
-      // Use FRA-compatible logout endpoint which handles the session clearing
-      // and redirect correctly without falling back to /app
-      window.location.href = '/api/method/logout';
+      // Redirect to the root logout page which handles the actual session clearing
+      // and then follows the system's home_page setting (which we set to /portal)
+      window.location.href = '/logout';
     });
   }
 

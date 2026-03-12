@@ -35,6 +35,10 @@ def _get_parishioner_context():
     return parishioner
 
 
+def _get_portal_login_url():
+    return "/portal/login?redirect-to=/portal"
+
+
 def _matches_record_scope(record, ctx):
     scope = (record.get("target_scope") or record.get("audience_scope"))
     if not scope:
@@ -380,3 +384,13 @@ def get_collection_types():
         order_by="collection_type asc",
         ignore_permissions=True,
     )
+
+
+@frappe.whitelist(methods=["POST"])
+def portal_logout():
+    if frappe.session.user != "Guest":
+        frappe.local.login_manager.logout()
+
+    return {
+        "redirect_to": _get_portal_login_url(),
+    }

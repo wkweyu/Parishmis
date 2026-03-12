@@ -244,6 +244,10 @@
       }
     } catch (error) {
       console.error(error);
+      if (/log in|permission/i.test(error.message || '')) {
+        window.location.href = '/portal/login?redirect-to=/portal';
+        return;
+      }
       alert('Unable to load portal data. Please refresh.');
     } finally {
       document.body.classList.remove('cursor-wait');
@@ -356,11 +360,17 @@
   function bindLogout() {
     const logoutLink = document.querySelector('[data-logout]');
     if (!logoutLink) return;
-    logoutLink.addEventListener('click', (event) => {
+    logoutLink.addEventListener('click', async (event) => {
       event.preventDefault();
-      // Redirect to the root logout page which handles the actual session clearing
-      // and then follows the system's home_page setting (which we set to /portal)
-      window.location.href = '/logout';
+      try {
+        const result = await fetchJSON('parishmis.api.portal.portal_logout', {
+          method: 'POST'
+        });
+        window.location.href = result?.redirect_to || '/portal/login?redirect-to=/portal';
+      } catch (error) {
+        console.error(error);
+        window.location.href = '/portal/login?redirect-to=/portal';
+      }
     });
   }
 

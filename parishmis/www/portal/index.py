@@ -4,9 +4,14 @@ from frappe import _
 no_cache = 1
 
 
+def _redirect(location):
+    frappe.local.flags.redirect_location = location
+    raise frappe.Redirect
+
+
 def get_context(context):
     if frappe.session.user == "Guest":
-        frappe.throw(_("Please log in to open the parishioner portal."), frappe.PermissionError)
+        _redirect("/portal/login?redirect-to=/portal")
 
     if "Portal User" not in frappe.get_roles():
         frappe.throw(

@@ -358,8 +358,9 @@
     if (!logoutLink) return;
     logoutLink.addEventListener('click', (event) => {
       event.preventDefault();
-      // Use standard Frappe logout command which handles session clearing correctly
-      window.location.href = '/?cmd=logout';
+      // Use FRA-compatible logout endpoint which handles the session clearing
+      // and redirect correctly without falling back to /app
+      window.location.href = '/api/method/logout';
     });
   }
 

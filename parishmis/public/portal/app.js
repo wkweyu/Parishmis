@@ -356,15 +356,10 @@
   function bindLogout() {
     const logoutLink = document.querySelector('[data-logout]');
     if (!logoutLink) return;
-    logoutLink.addEventListener('click', async (event) => {
+    logoutLink.addEventListener('click', (event) => {
       event.preventDefault();
-      try {
-        await fetchJSON('logout', { method: 'POST' });
-      } catch (error) {
-        console.warn('Logout failed', error);
-      } finally {
-        window.location.href = '/login';
-      }
+      // Use standard Frappe logout command which handles session clearing correctly
+      window.location.href = '/?cmd=logout';
     });
   }
 

@@ -201,21 +201,52 @@
       return;
     }
 
-    container.innerHTML = list.slice(0, 8)
-      .map(
-        (row) => `
-          <article class="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <p class="text-sm font-semibold">${row.role || 'Leader'}</p>
-                <p class="text-xs uppercase tracking-[0.25em] text-amber-200">${row.reference_doctype || 'Ministry'}</p>
-              </div>
-              <span class="text-xs text-slate-400">${fmtDate(row.from_date)}</span>
+    const groupOrder = ['Parish', 'Church', 'SCC', 'Movement', 'Association'];
+    const grouped = list.reduce((acc, row) => {
+      const key = row.reference_doctype || 'Other';
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(row);
+      return acc;
+    }, {});
+
+    const sortedGroups = Object.keys(grouped).sort((a, b) => {
+      const aIndex = groupOrder.indexOf(a);
+      const bIndex = groupOrder.indexOf(b);
+      if (aIndex === -1 && bIndex === -1) return a.localeCompare(b);
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
+
+    container.innerHTML = sortedGroups
+      .map((group) => {
+        const rows = grouped[group]
+          .slice()
+          .sort((a, b) => String(a.reference_label || '').localeCompare(String(b.reference_label || '')));
+
+        return `
+          <section class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div class="mb-3 flex items-center justify-between">
+              <p class="text-xs uppercase tracking-[0.3em] text-amber-200">${group}</p>
+              <span class="text-xs text-slate-400">${rows.length} ${rows.length === 1 ? 'role' : 'roles'}</span>
             </div>
-            <p class="mt-2 text-sm text-slate-200">${row.reference_label || row.reference_name || '—'}</p>
-            ${row.to_date ? `<p class="text-xs text-slate-400">Until ${fmtDate(row.to_date)}</p>` : '<p class="text-xs text-emerald-200">Current assignment</p>'}
-          </article>`
-      )
+            <div class="space-y-3">
+              ${rows.map(
+                (row) => `
+                  <article class="rounded-2xl bg-slate-900/40 px-4 py-3">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <p class="text-sm font-semibold">${row.role || 'Leader'}</p>
+                        <p class="mt-1 text-sm text-slate-200">${row.reference_label || row.reference_name || '—'}</p>
+                      </div>
+                      <span class="text-xs text-slate-400">${fmtDate(row.from_date)}</span>
+                    </div>
+                    ${row.to_date ? `<p class="mt-2 text-xs text-slate-400">Until ${fmtDate(row.to_date)}</p>` : '<p class="mt-2 text-xs text-emerald-200">Current assignment</p>'}
+                  </article>`
+              ).join('')}
+            </div>
+          </section>`;
+      })
       .join('');
   }
 

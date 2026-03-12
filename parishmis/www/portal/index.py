@@ -21,6 +21,8 @@ def get_context(context):
 
     context.show_sidebar = False
     context.show_search = False
+    context.no_header = True
+    context.full_width = True
     context.no_cache = 1
     context.csrf_token = frappe.local.session.data.csrf_token
     context.portal_user = frappe.session.user

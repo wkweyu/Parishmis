@@ -20,6 +20,11 @@
     <style>
         .navbar,
         .web-header,
+        .page-breadcrumbs,
+        .page-header-wrapper,
+        .page-footer,
+        footer,
+        .web-footer,
         nav {
             display: none !important;
         }
@@ -27,21 +32,18 @@
         .web-page-wrapper,
         .page-wrapper,
         .page-content-wrapper,
-        .page-content {
+        .page_content {
             background: #020617 !important;
             margin: 0 !important;
             padding-top: 0 !important;
         }
-        .page-breadcrumb,
-        .page-header,
-        .page-head,
-        .breadcrumb,
-        .page-title,
-        .page-title-row,
-        footer,
-        .web-footer,
-        .page-footer {
-            display: none !important;
+        .page-content-wrapper > main,
+        .page-content-wrapper > main.container,
+        .page-content-wrapper > main.container.my-4 {
+            max-width: none !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
     </style>
 {% endblock %}

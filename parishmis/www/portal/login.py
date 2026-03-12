@@ -22,6 +22,7 @@ def get_context(context):
         _redirect("/app")
 
     context.no_header = True
+    context.full_width = True
     context.no_cache = 1
     context.show_sidebar = False
     context.show_search = False

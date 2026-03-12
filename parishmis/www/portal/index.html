@@ -26,86 +26,34 @@
         };
     </script>
     <style>
-        body[data-path="/portal"] .navbar,
-        body[data-path="/portal/"] .navbar,
-        body[data-route="portal"] .navbar,
-        body[data-path="/portal"] .web-header,
-        body[data-path="/portal/"] .web-header,
-        body[data-route="portal"] .web-header,
-        body[data-path="/portal"] nav,
-        body[data-path="/portal/"] nav,
-        body[data-route="portal"] nav {
+        .navbar,
+        .web-header,
+        .page-breadcrumbs,
+        .page-header-wrapper,
+        .page-footer,
+        footer,
+        .web-footer {
             display: none !important;
-        }
-        body[data-path="/portal"] .page-breadcrumb,
-        body[data-path="/portal/"] .page-breadcrumb,
-        body[data-route="portal"] .page-breadcrumb,
-        body[data-path="/portal"] .page-header,
-        body[data-path="/portal/"] .page-header,
-        body[data-route="portal"] .page-header,
-        body[data-path="/portal"] .page-head,
-        body[data-path="/portal/"] .page-head,
-        body[data-route="portal"] .page-head {
-            display: none;
-        }
-        body[data-path="/portal"] .breadcrumb,
-        body[data-path="/portal/"] .breadcrumb,
-        body[data-route="portal"] .breadcrumb,
-        body[data-path="/portal"] .page-title,
-        body[data-path="/portal/"] .page-title,
-        body[data-route="portal"] .page-title,
-        body[data-path="/portal"] .page-title-row,
-        body[data-path="/portal/"] .page-title-row,
-        body[data-route="portal"] .page-title-row {
-            display: none;
-        }
-        body[data-path="/portal"] footer,
-        body[data-path="/portal/"] footer,
-        body[data-route="portal"] footer,
-        body[data-path="/portal"] .web-footer,
-        body[data-path="/portal/"] .web-footer,
-        body[data-route="portal"] .web-footer,
-        body[data-path="/portal"] .page-footer,
-        body[data-path="/portal/"] .page-footer,
-        body[data-route="portal"] .page-footer {
-            display: none;
         }
         html,
         body,
-        body[data-path="/portal"],
-        body[data-path="/portal/"] ,
-        body[data-route="portal"],
-        body[data-path="/portal"] .web-page-wrapper,
-        body[data-path="/portal/"] .web-page-wrapper,
-        body[data-route="portal"] .web-page-wrapper,
-        body[data-path="/portal"] .page-wrapper,
-        body[data-path="/portal/"] .page-wrapper,
-        body[data-route="portal"] .page-wrapper {
+        .web-page-wrapper,
+        .page-wrapper,
+        .page-content-wrapper,
+        .page_content {
             background: #0f172a;
-            margin: 0;
+            margin: 0 !important;
+            padding: 0 !important;
         }
-        body[data-path="/portal"] .web-page-wrapper,
-        body[data-path="/portal/"] .web-page-wrapper,
-        body[data-route="portal"] .web-page-wrapper,
-        body[data-path="/portal"] .page-wrapper,
-        body[data-path="/portal/"] .page-wrapper,
-        body[data-route="portal"] .page-wrapper {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            margin-top: 0 !important;
+        .page-content-wrapper > main,
+        .page-content-wrapper > main.container,
+        .page-content-wrapper > main.container.my-4 {
+            max-width: none !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
-        body[data-path="/portal"] .page-content-wrapper,
-        body[data-path="/portal/"] .page-content-wrapper,
-        body[data-route="portal"] .page-content-wrapper {
-            padding-bottom: 0 !important;
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-        body[data-path="/portal"] .page-content,
-        body[data-path="/portal/"] .page-content,
-        body[data-route="portal"] .page-content {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
+        .page_content {
             min-height: 100vh;
         }
     </style>

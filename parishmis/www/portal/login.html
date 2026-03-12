@@ -96,7 +96,7 @@
                     throw new Error(payload.message || 'Login failed.');
                 }
 
-                window.location.href = payload.redirect_to || payload.home_page || redirectTo;
+                window.location.href = redirectTo || payload.redirect_to || payload.home_page || '/portal';
             } catch (error) {
                 feedback.textContent = error.message || 'Login failed. Please try again.';
             }
